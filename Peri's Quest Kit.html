@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peri's Summer Quest Kit</title>
+<link rel="stylesheet" href="quest-kit.css">
+<style>
+.medallion{display:inline-flex;align-items:center;justify-content:center;border-radius:18px;background:var(--c-soft);color:var(--c);flex:none;box-shadow:inset 0 0 0 2px #fff;}
+.medallion .i{font-size:.5in;}
+.medallion--sm{width:.62in;height:.62in;border-radius:14px;}
+.medallion--sm .i{font-size:.36in;}
+.medallion--med{width:.84in;height:.84in;border-radius:18px;}
+.medallion--med .i{font-size:.5in;}
+.medallion--lg{width:1.2in;height:1.2in;border-radius:24px;}
+.medallion--lg .i{font-size:.72in;}
+
+.dcard{height:100%;}
+.dcard__head{display:flex;align-items:center;gap:.16in;}
+.dcard .steps{margin-top:.04in;}
+.parent-flag{display:inline-flex;align-items:center;gap:.08in;align-self:flex-start;font-family:var(--arcade);font-size:7px;letter-spacing:.06em;color:var(--ink-faint);background:#fff;border-radius:999px;padding:.06in .14in;text-transform:uppercase;}
+.parent-flag .i{font-size:12px;}
+
+.hero{flex-direction:row;align-items:stretch;height:100%;}
+.hero__rail{flex:none;width:1.8in;background:var(--c-soft);display:flex;align-items:center;justify-content:center;}
+.hero__rail .medallion .i{font-size:.72in;}
+.hero__body{padding:.3in .34in;display:flex;flex-direction:column;gap:.14in;flex:1;justify-content:center;}
+.hero__title{font-size:30px;}
+.bonus-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.12in;}
+.bonus-list li{display:flex;align-items:center;gap:.16in;font-size:18px;font-weight:500;background:var(--c-soft);border-radius:14px;padding:.14in .18in;}
+.bonus-list .or{font-family:var(--arcade);font-size:10px;color:var(--c-ink);background:#fff;border-radius:9px;min-width:.46in;height:.46in;display:inline-flex;align-items:center;justify-content:center;flex:none;}
+.bonus-list .or .i{font-size:20px;color:var(--c);}
+.bigfill{display:flex;align-items:center;gap:.16in;font-weight:600;}
+.bigfill .box{flex:1;border:3px dashed var(--c);border-radius:16px;background:#fff;}
+.notfor{display:flex;align-items:center;gap:.1in;flex-wrap:wrap;font-size:13.5px;font-weight:600;color:var(--ink-soft);}
+.notfor .p{background:#F1E3EA;border-radius:999px;padding:.08in .16in;}
+
+.cover-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.04in;margin-top:.1in;}
+.cover-title{font-weight:700;font-size:58px;line-height:1.0;letter-spacing:-.015em;white-space:nowrap;}
+.cover-title .pink{color:var(--sister);} .cover-title .pur{color:var(--parent);} .cover-title .blue{color:var(--brain);}
+.cover-bunny{display:flex;align-items:center;justify-content:center;gap:.18in;font-size:.5in;margin:.04in 0;}
+.cover-bunny .b{color:#9aa0aa;} .cover-bunny .s{color:var(--star);font-size:.32in;}
+.qlegend{display:grid;grid-template-columns:1fr 1fr;gap:.18in;margin-top:.18in;}
+.qlegend .ql{display:flex;align-items:center;gap:.18in;background:#fff;border-radius:20px;padding:.2in .22in;box-shadow:var(--shadow-soft);border-left:.14in solid var(--c);}
+.qlegend .ql b{font-size:22px;font-weight:600;display:block;}
+.qlegend .ql span{font-size:13.5px;color:var(--ink-soft);}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:.16in;margin-top:.2in;}
+.rule{display:flex;align-items:center;gap:.16in;background:var(--paper-2);border-radius:16px;padding:.18in .2in;font-weight:500;font-size:16.5px;}
+.rule .n{flex:none;width:.46in;height:.46in;border-radius:50%;background:var(--parent);color:#fff;font-family:var(--arcade);font-size:12px;display:flex;align-items:center;justify-content:center;}
+.support-legend{display:flex;gap:.18in;margin-top:.2in;justify-content:center;flex-wrap:wrap;}
+.support-legend .s{display:inline-flex;align-items:center;gap:.12in;font-size:15px;font-weight:500;color:var(--c-ink);background:var(--c-soft);border-radius:999px;padding:.14in .22in;}
+.support-legend .s .i{font-size:1.3em;color:var(--c);}
+.currency{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:.18in;background:var(--ink);color:#fff;border-radius:22px;padding:.24in;font-size:20px;font-weight:600;}
+.currency .coin{font-size:.5in;}
+
+.qboard{display:grid;grid-template-columns:1.2fr repeat(4,1fr) .82fr;grid-auto-rows:1fr;gap:.08in;flex:1;margin-top:.22in;}
+.qb-h{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.03in;border-radius:14px;padding:.08in .04in;text-align:center;background:var(--c-soft);color:var(--c-ink);}
+.qb-h .i{font-size:.32in;color:var(--c);}
+.qb-h b{font-size:15px;font-weight:600;line-height:1.05;}
+.qb-h span{font-size:9px;color:var(--c-ink);opacity:.75;text-transform:uppercase;letter-spacing:.05em;}
+.qb-corner{background:transparent;}
+.qb-day{display:flex;flex-direction:column;justify-content:center;padding-left:.16in;font-weight:600;font-size:17px;background:#fff;border-radius:12px;box-shadow:var(--shadow-soft);}
+.qb-day small{font-size:10.5px;color:var(--ink-faint);font-weight:500;}
+.qb-cell{display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px;}
+.qb-cell.alt{background:var(--c-soft);}
+.qb-bonus{display:flex;align-items:center;justify-content:center;background:var(--shop-soft);border-radius:12px;}
+.qb-bonus .slot{border-color:var(--shop);color:var(--shop);}
+.qb-foot{display:flex;align-items:center;gap:.18in;margin-top:.2in;}
+.qb-note{display:flex;align-items:center;gap:.14in;background:var(--shop-soft);color:var(--shop-ink);border-radius:18px;padding:.18in .24in;font-weight:600;font-size:16.5px;flex:1;}
+.qb-note .i{font-size:.34in;color:var(--shop);flex:none;}
+.coin-note{display:flex;align-items:center;gap:.12in;font-weight:600;font-size:15px;color:var(--gold-ink);background:#FCEFC6;border-radius:999px;padding:.16in .22in;flex:none;}
+.coin-note .coin{font-size:.32in;}
+
+.shoplist{display:flex;flex-direction:column;gap:.15in;flex:1;margin-top:.2in;}
+.tier{--c:var(--shop);display:grid;grid-template-columns:1.2in 1fr auto;gap:.24in;align-items:center;background:#fff;border-radius:var(--r);padding:.22in .3in;box-shadow:var(--shadow-soft);border-left:.16in solid var(--shop);}
+.tier__cost{display:flex;flex-direction:column;align-items:center;gap:.03in;}
+.tier__coin{width:.7in;height:.7in;font-size:.38in;}
+.tier__cost .lv{font-family:var(--arcade);font-size:8px;color:var(--shop-ink);}
+.tier__cost b{font-family:var(--arcade);font-size:14px;color:var(--gold-ink);}
+.tier__main h3{margin:0;font-size:24px;font-weight:700;}
+.tier__ex{margin:.05in 0 0;font-size:14.5px;color:var(--ink-soft);line-height:1.35;}
+.tier__ic{color:var(--shop);font-size:.62in;opacity:.92;}
+.shop-foot{display:grid;grid-template-columns:1fr 1fr;gap:.16in;margin-top:.2in;}
+.shop-foot .sf{display:flex;gap:.16in;align-items:flex-start;background:var(--c-soft);border-radius:18px;padding:.2in;}
+.shop-foot .sf .i{font-size:.4in;color:var(--c);flex:none;}
+.shop-foot .sf b{font-size:16px;display:block;color:var(--c-ink);}
+.shop-foot .sf span{font-size:13.5px;color:var(--ink-soft);line-height:1.3;}
+
+.tcard{height:100%;}
+.tcard .rar{display:flex;gap:2px;color:var(--star);font-size:15px;}
+.tcard .tcost{display:flex;align-items:center;gap:.12in;margin-top:auto;}
+.tcard .tcost .coin{font-size:.42in;}
+.tcard .tcost b{font-family:var(--arcade);font-size:12px;color:var(--gold-ink);}
+.tcard ul{list-style:none;margin:.04in 0 0;padding:0;display:flex;flex-direction:column;gap:.08in;}
+.tcard ul li{display:flex;gap:.12in;align-items:center;font-size:15px;}
+.tcard ul li::before{content:"";width:.13in;height:.13in;border-radius:50%;background:var(--shop);flex:none;}
+
+.mcard{aspect-ratio:2.5/3.5;border-radius:18px;background:#fff;box-shadow:var(--shadow-soft);border:2.5px solid var(--shop-soft);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.14in;gap:.12in;}
+.mcard .medallion{width:.84in;height:.84in;}
+.mcard .medallion .i{font-size:.5in;}
+.mcard b{font-size:16px;font-weight:600;line-height:1.15;}
+.mcard .tag{font-family:var(--arcade);font-size:6.5px;color:var(--shop);letter-spacing:.08em;}
+.mback{aspect-ratio:2.5/3.5;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.08in;color:#fff;background:repeating-linear-gradient(45deg,var(--shop),var(--shop) 13px,#e3582f 13px,#e3582f 26px);border:3px solid #fff;box-shadow:var(--shadow-soft);}
+.mback .q{font-family:var(--arcade);font-size:24px;text-shadow:0 3px 0 rgba(0,0,0,.18);}
+.mback small{font-family:var(--arcade);font-size:6.5px;letter-spacing:.1em;}
+.mback .medallion{background:#fff;color:var(--shop);width:.8in;height:.8in;box-shadow:none;}
+.mback .medallion .i{font-size:.46in;}
+
+.signcard{height:100%;align-items:center;text-align:center;justify-content:center;gap:.14in;padding:.34in .26in;display:flex;flex-direction:column;}
+.signcard .medallion{width:1.1in;height:1.1in;}
+.signcard .medallion .i{font-size:.66in;}
+.signcard h3{margin:0;font-size:26px;font-weight:700;}
+.signcard p{margin:0;font-size:16px;color:var(--ink-soft);line-height:1.35;}
+
+.wk-grid{display:grid;grid-template-columns:1fr 1fr;gap:.18in;flex:1;margin-top:.22in;}
+.wk-field{background:#fff;border-radius:20px;box-shadow:var(--shadow-soft);padding:.22in .24in;display:flex;flex-direction:column;gap:.1in;}
+.wk-field .lbl{display:flex;align-items:center;gap:.12in;font-weight:600;font-size:17px;}
+.wk-field .lbl .i{color:var(--c);font-size:.32in;}
+.wk-field .write{flex:1;min-height:.62in;border:2.5px dashed var(--line);border-radius:14px;background:var(--paper);}
+.wk-nums{display:flex;gap:.16in;}
+.wk-nums .n{flex:1;text-align:center;border-radius:14px;padding:.14in .06in;}
+.wk-nums .n .box{height:.62in;border:2.5px dashed var(--c);border-radius:12px;background:#fff;margin-top:.08in;}
+.wk-nums .n small{font-family:var(--arcade);font-size:9px;font-weight:600;color:var(--c-ink);}
+.wk-span{grid-column:1 / -1;}
+
+.pagehead{display:flex;align-items:flex-start;gap:.24in;}
+.pagehead>div{min-width:0;}
+.pagehead .medallion{width:1in;height:1in;}
+.pagehead .medallion .i{font-size:.6in;}
+.pagehead .kicker{margin-bottom:.04in;}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.22in;flex:1;margin-top:.24in;}
+.col{display:flex;flex-direction:column;gap:.16in;}
+.block{background:#fff;border-radius:20px;box-shadow:var(--shadow-soft);padding:.24in;}
+.block h4{margin:0 0 .14in;font-size:18px;font-weight:700;display:flex;align-items:center;gap:.12in;}
+.block h4 .i{color:var(--c);font-size:1.3em;}
+.flow{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.13in;}
+.flow li{display:flex;align-items:center;gap:.14in;font-size:16.5px;font-weight:500;}
+.ruleblock{background:var(--parent-soft);border-radius:16px;padding:.16in .2in;font-size:15px;color:var(--parent-ink);font-weight:500;line-height:1.32;}
+.ruleblock b{font-weight:700;}
+
+.bank-big{display:flex;align-items:center;justify-content:center;gap:.28in;background:#fff;border-radius:28px;box-shadow:var(--shadow-card);padding:.5in;margin-top:.3in;}
+.bank-big .coin{font-size:1.4in;}
+.bank-big .txt{font-size:34px;font-weight:700;display:flex;align-items:center;gap:.16in;}
+.bank-big .box{width:2in;height:1.2in;border:4px dashed var(--gold);border-radius:22px;background:var(--paper);}
+.bank-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:.18in;margin-top:.3in;}
+.bank-choice{background:var(--c-soft);border-radius:22px;padding:.3in .2in;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.12in;}
+.bank-choice .medallion{width:1in;height:1in;}
+.bank-choice .medallion .i{font-size:.58in;}
+.bank-choice b{font-size:20px;}
+.bank-choice span{font-size:13.5px;color:var(--ink-soft);line-height:1.3;}
+.dryerase{margin-top:auto;text-align:center;font-size:15px;background:var(--reset-soft);color:var(--reset-ink);border-radius:999px;padding:.18in;font-weight:600;}
+
+.tipcard{height:100%;background:var(--paper-2);box-shadow:none;border:2.5px dashed var(--line);}
+.tipcard .card__body{gap:.1in;}
+.tipcard p{margin:0;font-size:14.5px;line-height:1.4;color:var(--ink-soft);}
+.tipcard .steps li{font-size:15px;font-weight:500;}
+</style>
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="16" fill="#FCEFF4"/><g transform="translate(50 52)" fill="#F3B100"><path d="M0 -22 6.5 -7 22 -5 10.5 6 13 22 0 14 -13 22 -10.5 6 -22 -5 -6.5 -7Z"/></g><g transform="translate(50 50)" fill="#E5559A"><circle cx="0" cy="6" r="9"/></g></svg>
+</template>
+</head>
+<body>
+
+<svg class="icon-sprite" aria-hidden="true">
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M11 5.6C8.8 4.2 6.1 4 3.4 4.9 3.2 5 3 5.2 3 5.5v12.2c0 .4.4.7.8.5 2.3-.7 4.6-.5 6.5.7.4.3 1 .3 1.4 0 1.9-1.2 4.2-1.4 6.5-.7.4.1.8-.1.8-.5V5.5c0-.3-.2-.5-.4-.6C18 4 15.3 4.2 13 5.6 12.4 6 11.6 6 11 5.6Z" opacity=".18"/><path d="M12 6.1v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3.6 5.4C6.2 4.4 9 4.6 11.2 6c.5.3.5 1 0 1.3v0c-2-1.1-4.3-1.3-6.5-.7-.5.1-1-.2-1-.7 0-.3.2-.6.5-.7Z"/><path d="M11 7.2v11.6c-1.9-1.1-4-1.3-6.1-.8V6.3c2.1-.4 4.3-.1 6.1.9Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13 7.2v11.6c1.9-1.1 4-1.3 6.1-.8V6.3c-2.1-.4-4.3-.1-6.1.9Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+<symbol id="i-sprout" viewBox="0 0 24 24"><path d="M12 21v-7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M11.5 14.5C11.5 10.8 8.7 8 4.6 8 4.6 11.9 7.6 14.7 11.5 14.7Z"/><path d="M12.6 12.8C12.6 9.2 15.4 6.7 19.4 6.9 19.1 10.7 16.4 13 12.6 12.8Z"/></symbol>
+<symbol id="i-house" viewBox="0 0 24 24"><path d="M12 3 3 10.6c-.3.3-.1.8.3.8H5V20a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1v-8.6h1.7c.4 0 .6-.5.3-.8Z"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.5C12 20.5 3.2 14.8 3.2 8.9A4.4 4.4 0 0 1 12 6.2a4.4 4.4 0 0 1 8.8 2.7C20.8 14.8 12 20.5 12 20.5Z"/></symbol>
+<symbol id="i-bag" viewBox="0 0 24 24"><path d="M6.4 8.2h11.2a1 1 0 0 1 1 .9l.8 10.4a1.2 1.2 0 0 1-1.2 1.3H5.8a1.2 1.2 0 0 1-1.2-1.3l.8-10.4a1 1 0 0 1 1-.9Z"/><path d="M9 9V7.4a3 3 0 0 1 6 0V9" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/></symbol>
+<symbol id="i-bubble" viewBox="0 0 24 24"><path d="M5 4.5h14a2.2 2.2 0 0 1 2.2 2.2v7.1A2.2 2.2 0 0 1 19 16H11l-4 3.2c-.5.4-1.2 0-1.2-.6V16H5a2.2 2.2 0 0 1-2.2-2.2V6.7A2.2 2.2 0 0 1 5 4.5Z"/></symbol>
+<symbol id="i-loop" viewBox="0 0 24 24"><path d="M18.8 12a6.8 6.8 0 1 1-2.1-4.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M17.4 3l.3 4.2-4 .2Z"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.6 14.7 8l6 .9-4.3 4.2 1 6L12 16.3 6.6 19.1l1-6L3.3 8.9l6-.9Z"/></symbol>
+<symbol id="i-bunny" viewBox="0 0 24 24"><ellipse cx="8.6" cy="6.2" rx="2.1" ry="4.4"/><ellipse cx="15.4" cy="6.2" rx="2.1" ry="4.4"/><circle cx="12" cy="15.4" r="5.8"/><circle cx="10.1" cy="14.6" r=".9" fill="#fff"/><circle cx="13.9" cy="14.6" r=".9" fill="#fff"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2c.7 5 1.9 6.2 7 7-5.1.8-6.3 2-7 7-.7-5-1.9-6.2-7-7 5.1-.8 6.3-2 7-7Z"/></symbol>
+<symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.6" y="7.6" width="16.8" height="3.4" rx="1.1"/><path d="M5 11h14v8a1.2 1.2 0 0 1-1.2 1.2H6.2A1.2 1.2 0 0 1 5 19Z"/><path d="M12 7.6V20" stroke="#fff" stroke-width="1.7"/><circle cx="9.4" cy="5.4" r="2.1"/><circle cx="14.6" cy="5.4" r="2.1"/></symbol>
+<symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="14" r="7" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M12 14V9.6" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M9.8 3h4.4M12 3v3" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></symbol>
+<symbol id="i-candy" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7.6" ry="5.6"/><ellipse cx="10" cy="10.4" rx="2.1" ry="1.4" fill="#fff" opacity=".55"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4.2 4.2L19 6.6" fill="none" stroke="currentColor" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 3.2s6.2 7 6.2 11.1A6.2 6.2 0 0 1 5.8 14.3C5.8 10.2 12 3.2 12 3.2Z"/></symbol>
+<symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20.2l1.2-4.3L15.4 5.7l3 3L8.2 18.9Z"/><path d="M14.2 6.9l2.9 2.9" stroke="#fff" stroke-width="1.5"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 3.2h4v5.4l4.9 8.7a1.9 1.9 0 0 1-1.7 2.9H6.8a1.9 1.9 0 0 1-1.7-2.9L10 8.6Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M8.4 13.4h7.2" stroke="currentColor" stroke-width="2.2"/><circle cx="10.4" cy="16.4" r="1"/><circle cx="13.6" cy="17.4" r="1"/></symbol>
+<symbol id="i-numline" viewBox="0 0 24 24"><path d="M3 18h18" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M6 18v-2.4M12 18v-2.4M18 18v-2.4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 18c1.6-5.4 4.4-5.4 6 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M11 7.4 12 6l1 1.4Z"/></symbol>
+<symbol id="i-flash" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8.2 15l2.4-6 2.4 6M9 13h3.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="13.6" r="1.1"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M4 8.4h16V19a1.2 1.2 0 0 1-1.2 1.2H5.2A1.2 1.2 0 0 1 4 19Z"/><rect x="2.8" y="5" width="18.4" height="3.4" rx="1"/></symbol>
+<symbol id="i-basket" viewBox="0 0 24 24"><path d="M4.4 9h15.2l-1.3 9.9a1.2 1.2 0 0 1-1.2 1H6.9a1.2 1.2 0 0 1-1.2-1Z"/><path d="M8.4 9 10 4.4M15.6 9 14 4.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 12.5v4M12 12.5v4M15 12.5v4" stroke="#fff" stroke-width="1.4"/></symbol>
+<symbol id="i-sock" viewBox="0 0 24 24"><path d="M9 3.2h4v8.2c0 .9.4 1.4 1.4 2l3 1.9c2.4 1.5 1.5 5.1-1.8 5.1-1.1 0-1.9-.3-2.8-.9l-4.2-2.7C6.4 17.6 6 16 6 14.2V6.2c0-2 1.4-3 3-3Z"/></symbol>
+<symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="8.2" width="18" height="2.6" rx="1.1"/><path d="M5.6 10.8V19M18.4 10.8V19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+<symbol id="i-plate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-paw" viewBox="0 0 24 24"><circle cx="12" cy="15.4" r="4.2"/><circle cx="6.6" cy="11" r="1.9"/><circle cx="17.4" cy="11" r="1.9"/><circle cx="9.2" cy="7" r="1.8"/><circle cx="14.8" cy="7" r="1.8"/></symbol>
+<symbol id="i-swap" viewBox="0 0 24 24"><path d="M6 8.4h11l-3-3M18 15.6H7l3 3" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.2" width="14" height="9.6" rx="2.2"/><path d="M8 10.2V7.4a4 4 0 0 1 8 0v2.8" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="12" cy="14.6" r="1.5" fill="#fff"/></symbol>
+<symbol id="i-baby" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2"/><path d="M5 21a7 7 0 0 1 14 0Z"/><circle cx="10.4" cy="8" r=".8" fill="#fff"/><circle cx="13.6" cy="8" r=".8" fill="#fff"/></symbol>
+<symbol id="i-people" viewBox="0 0 24 24"><circle cx="8.8" cy="8" r="3.1"/><path d="M3.4 20a5.4 5.4 0 0 1 10.8 0Z"/><circle cx="16.6" cy="9" r="2.5"/><path d="M14.6 20a4.6 4.6 0 0 1 6.9-3.9 4.6 4.6 0 0 1 .5 3.9Z" opacity=".85"/></symbol>
+<symbol id="i-chest" viewBox="0 0 24 24"><path d="M4 11a8 8 0 0 1 16 0v.4H4Z"/><rect x="4" y="11.2" width="16" height="8" rx="1.4"/><rect x="10.6" y="11" width="2.8" height="4.4" rx="1" fill="#fff"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.4v2.6M12 19v2.6M2.4 12H5M19 12h2.6M5.2 5.2 7 7M17 17l1.8 1.8M18.8 5.2 17 7M7 17l-1.8 1.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 15A8.2 8.2 0 0 1 9.4 3.9 8.2 8.2 0 1 0 20.5 15Z"/></symbol>
+<symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 19v-7M3 14h14a3.4 3.4 0 0 1 3.4 3.4V19M21 19v-5.2" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M6.2 14v-2.2a1.4 1.4 0 0 1 1.4-1.4h3.2a1.4 1.4 0 0 1 1.4 1.4V14Z"/></symbol>
+<symbol id="i-shoe" viewBox="0 0 24 24"><path d="M3 16.4V10.6l3 1 4.2 3 7.6 1A3 3 0 0 1 21 19.4v.6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 4h10v3.5a5 5 0 0 1-10 0Z"/><path d="M7 5.4H4.4v1A3 3 0 0 0 7.4 9.4M17 5.4h2.6v1a3 3 0 0 1-3 3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 12.2h2v3.6h-2Z"/><path d="M8 20.2h8v-1.8a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1Z"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24"><path d="M9 18.4V6.2l9.5-2v10.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="6.8" cy="18.2" r="2.6"/><circle cx="16.3" cy="16.4" r="2.6"/></symbol>
+<symbol id="i-tv" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2.4" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M9 21h6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M10 9.6l4 2.4-4 2.4Z"/></symbol>
+<symbol id="i-crown" viewBox="0 0 24 24"><path d="M3.6 8.4 7 11.6l5-6.2 5 6.2 3.4-3.2L19 18H5Z"/><circle cx="3.6" cy="7.4" r="1.4"/><circle cx="20.4" cy="7.4" r="1.4"/><circle cx="12" cy="4.4" r="1.5"/></symbol>
+<symbol id="i-die" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3.4" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="9" cy="9" r="1.5"/><circle cx="15" cy="9" r="1.5"/><circle cx="9" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="8" r="4.4" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M11 11l8 8M16 16l2-2M18.5 18.5l1.5-1.5" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></symbol>
+<symbol id="i-hand" viewBox="0 0 24 24"><path d="M7 13V6.6a1.5 1.5 0 0 1 3 0V11m0-.4V5a1.5 1.5 0 0 1 3 0v5.6m0-.6V6.4a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6 5.4 5.4 0 0 1-4.3-2.1L4 14.6a1.5 1.5 0 0 1 2.3-1.9Z"/></symbol>
+<symbol id="i-popcorn" viewBox="0 0 24 24"><path d="M6.5 9h11l-1 11H7.5Z"/><path d="M6 9a2.4 2.4 0 0 1 .2-4 2.6 2.6 0 0 1 4.8-1 2.6 2.6 0 0 1 5 .4 2.4 2.4 0 0 1 1.8 4.6" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M10 12v5M14 12v5" stroke="#fff" stroke-width="1.3"/></symbol>
+<symbol id="i-cake" viewBox="0 0 24 24"><path d="M4 13a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v6H4Z"/><path d="M12 9V6m0 0 1.4-1.6L12 3l-1.4 1.4Z"/><path d="M4 16c2 1.4 4 1.4 5.3 0 1.4 1.4 3.4 1.4 5.4 0 1.3 1.4 3.3 1.4 5.3 0" fill="none" stroke="#fff" stroke-width="1.4"/></symbol>
+<symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 3.6v16.8M3.6 12h16.8M6 6c3 2.4 9 2.4 12 0M6 18c3-2.4 9-2.4 12 0" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.6 13.7 10l3.8.5-2.7 2.6.6 3.7L12 15.1 8.6 16.8l.6-3.7L6.5 10.5 10.3 10Z" fill="#fff"/></symbol>
+</svg>
+<div class="book">
+<section class="sheet" data-screen-label="Cover">
+  <div class="cover-head">
+    <div class="kicker">Peri’s Summer · Pre-K → Kindergarten</div>
+    <div class="cover-title"><span class="pink">Summer</span> <span class="blue">Quest</span> <span class="pur">Kit</span></div>
+    <div class="cover-bunny"><svg class="i s"><use href="#i-spark"/></svg><svg class="i b"><use href="#i-bunny"/></svg><svg class="i s"><use href="#i-spark"/></svg></div>
+    <p class="h-sub">Earn points. Spend or save them in the shop.</p>
+  </div>
+  <div class="qlegend"><div class="ql c-brain"><span class="medallion medallion--med c-brain"><svg class="i "><use href="#i-book"/></svg></span><div><b>Brain Quest</b><span>Read · write · math · science</span></div></div><div class="ql c-body"><span class="medallion medallion--med c-body"><svg class="i "><use href="#i-sprout"/></svg></span><div><b>Body Quest</b><span>Swim · gym · playground · trampoline</span></div></div><div class="ql c-helper"><span class="medallion medallion--med c-helper"><svg class="i "><use href="#i-house"/></svg></span><div><b>Helper Quest</b><span>Chores · cleanup · family jobs</span></div></div><div class="ql c-sister"><span class="medallion medallion--med c-sister"><svg class="i "><use href="#i-heart"/></svg></span><div><b>Big Sister Quest</b><span>Kindness · teaching · repair</span></div></div></div>
+  <div class="rules">
+    <div class="rule"><span class="n">1</span><span>One sticker = one <b>Quest Point</b>.</span></div>
+    <div class="rule"><span class="n">2</span><span>Earn up to <b>4 points</b> every day.</span></div>
+    <div class="rule"><span class="n">3</span><span>All 4 in a day = a <b>Daily Bonus</b>.</span></div>
+    <div class="rule"><span class="n">4</span><span>Earned points are <b>never taken away</b>.</span></div>
+  </div>
+  <div class="support-legend">
+    <span class="s c-shop"><svg class="i "><use href="#i-bag"/></svg> Quest Shop &amp; rewards</span>
+    <span class="s c-parent"><svg class="i "><use href="#i-bubble"/></svg> Parent scripts</span>
+    <span class="s c-reset"><svg class="i "><use href="#i-loop"/></svg> Reset &amp; routine</span>
+  </div>
+  <div class="currency"><span class="coin"><svg class="i "><use href="#i-star"/></svg></span> 1 sticker &nbsp;=&nbsp; 1 Quest Point &nbsp;=&nbsp; 1 step closer to the Quest Shop</div>
+<div class="pageno">PERI · QUEST KIT</div></section>
+<section class="sheet" data-screen-label="Quest Board">
+  <div class="pagehead"><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-star"/></svg></span><div><div class="kicker">Track it every day</div><h1 class="h-page title-pop">Peri’s Quest Board</h1><p class="h-sub">Put a sticker in a circle each time a quest is done.</p></div></div>
+  <div class="qboard"><div class="qb-h qb-corner"></div><div class="qb-h c-brain"><svg class="i "><use href="#i-book"/></svg><b>Brain</b><span>Quest</span></div><div class="qb-h c-body"><svg class="i "><use href="#i-sprout"/></svg><b>Body</b><span>Quest</span></div><div class="qb-h c-helper"><svg class="i "><use href="#i-house"/></svg><b>Helper</b><span>Quest</span></div><div class="qb-h c-sister"><svg class="i "><use href="#i-heart"/></svg><b>Big Sister</b><span>Quest</span></div><div class="qb-h c-shop"><svg class="i "><use href="#i-star"/></svg><b>All 4?</b><span>Bonus</span></div><div class="qb-day">Monday<small>Reading + helper</small></div><div class="qb-cell  c-brain"><span class="slot c-brain"><svg class="i "><use href="#i-book"/></svg></span></div><div class="qb-cell  c-body"><span class="slot c-body"><svg class="i "><use href="#i-sprout"/></svg></span></div><div class="qb-cell  c-helper"><span class="slot c-helper"><svg class="i "><use href="#i-house"/></svg></span></div><div class="qb-cell  c-sister"><span class="slot c-sister"><svg class="i "><use href="#i-heart"/></svg></span></div><div class="qb-bonus"><span class="slot"><svg class="i "><use href="#i-star"/></svg></span></div><div class="qb-day">Tuesday<small>Gym + grandparents</small></div><div class="qb-cell alt c-brain"><span class="slot c-brain"><svg class="i "><use href="#i-book"/></svg></span></div><div class="qb-cell alt c-body"><span class="slot c-body"><svg class="i "><use href="#i-sprout"/></svg></span></div><div class="qb-cell alt c-helper"><span class="slot c-helper"><svg class="i "><use href="#i-house"/></svg></span></div><div class="qb-cell alt c-sister"><span class="slot c-sister"><svg class="i "><use href="#i-heart"/></svg></span></div><div class="qb-bonus"><span class="slot"><svg class="i "><use href="#i-star"/></svg></span></div><div class="qb-day">Wednesday<small>Math + garden</small></div><div class="qb-cell  c-brain"><span class="slot c-brain"><svg class="i "><use href="#i-book"/></svg></span></div><div class="qb-cell  c-body"><span class="slot c-body"><svg class="i "><use href="#i-sprout"/></svg></span></div><div class="qb-cell  c-helper"><span class="slot c-helper"><svg class="i "><use href="#i-house"/></svg></span></div><div class="qb-cell  c-sister"><span class="slot c-sister"><svg class="i "><use href="#i-heart"/></svg></span></div><div class="qb-bonus"><span class="slot"><svg class="i "><use href="#i-star"/></svg></span></div><div class="qb-day">Thursday<small>Read/write + chore</small></div><div class="qb-cell alt c-brain"><span class="slot c-brain"><svg class="i "><use href="#i-book"/></svg></span></div><div class="qb-cell alt c-body"><span class="slot c-body"><svg class="i "><use href="#i-sprout"/></svg></span></div><div class="qb-cell alt c-helper"><span class="slot c-helper"><svg class="i "><use href="#i-house"/></svg></span></div><div class="qb-cell alt c-sister"><span class="slot c-sister"><svg class="i "><use href="#i-heart"/></svg></span></div><div class="qb-bonus"><span class="slot"><svg class="i "><use href="#i-star"/></svg></span></div><div class="qb-day">Friday<small>Review + adventure</small></div><div class="qb-cell  c-brain"><span class="slot c-brain"><svg class="i "><use href="#i-book"/></svg></span></div><div class="qb-cell  c-body"><span class="slot c-body"><svg class="i "><use href="#i-sprout"/></svg></span></div><div class="qb-cell  c-helper"><span class="slot c-helper"><svg class="i "><use href="#i-house"/></svg></span></div><div class="qb-cell  c-sister"><span class="slot c-sister"><svg class="i "><use href="#i-heart"/></svg></span></div><div class="qb-bonus"><span class="slot"><svg class="i "><use href="#i-star"/></svg></span></div><div class="qb-day">Saturday<small>Family project</small></div><div class="qb-cell alt c-brain"><span class="slot c-brain"><svg class="i "><use href="#i-book"/></svg></span></div><div class="qb-cell alt c-body"><span class="slot c-body"><svg class="i "><use href="#i-sprout"/></svg></span></div><div class="qb-cell alt c-helper"><span class="slot c-helper"><svg class="i "><use href="#i-house"/></svg></span></div><div class="qb-cell alt c-sister"><span class="slot c-sister"><svg class="i "><use href="#i-heart"/></svg></span></div><div class="qb-bonus"><span class="slot"><svg class="i "><use href="#i-star"/></svg></span></div><div class="qb-day">Sunday<small>Reset + choose</small></div><div class="qb-cell  c-brain"><span class="slot c-brain"><svg class="i "><use href="#i-book"/></svg></span></div><div class="qb-cell  c-body"><span class="slot c-body"><svg class="i "><use href="#i-sprout"/></svg></span></div><div class="qb-cell  c-helper"><span class="slot c-helper"><svg class="i "><use href="#i-house"/></svg></span></div><div class="qb-cell  c-sister"><span class="slot c-sister"><svg class="i "><use href="#i-heart"/></svg></span></div><div class="qb-bonus"><span class="slot"><svg class="i "><use href="#i-star"/></svg></span></div></div>
+  <div class="qb-foot">
+    <div class="qb-note"><svg class="i "><use href="#i-star"/></svg> Filled all 4 circles in a row? That day earns a <b>&nbsp;Daily Bonus&nbsp;</b> star!</div>
+    <div class="coin-note"><span class="coin"><svg class="i "><use href="#i-star"/></svg></span> 1 sticker = 1 Quest Point</div>
+  </div><div class="pageno">QUEST BOARD</div></section>
+<section class="sheet" data-screen-label="Quest Shop">
+  <div class="pagehead"><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-bag"/></svg></span><div><div class="kicker">Prize counter — open at shop time</div><h1 class="h-page title-pop" style="color:var(--shop-ink)">Peri’s Quest Shop</h1><p class="h-sub">Use your Quest Points to buy a reward.</p></div></div>
+  <div class="shoplist"><div class="tier">
+      <div class="tier__cost"><span class="coin tier__coin"><svg class="i "><use href="#i-star"/></svg></span><b>3</b><span class="lv">LV.1</span></div>
+      <div class="tier__main"><h3>Tiny Treat</h3><p class="tier__ex">Sticker  ·  Tattoo  ·  Pick a song  ·  Dad game</p></div>
+      <div class="tier__ic"><svg class="i "><use href="#i-candy"/></svg></div></div><div class="tier">
+      <div class="tier__cost"><span class="coin tier__coin"><svg class="i "><use href="#i-star"/></svg></span><b>6</b><span class="lv">LV.2</span></div>
+      <div class="tier__main"><h3>Small Prize</h3><p class="tier__ex">Treasure box  ·  Lollipop  ·  Bubbles  ·  Extra story  ·  Pick dessert</p></div>
+      <div class="tier__ic"><svg class="i "><use href="#i-gift"/></svg></div></div><div class="tier">
+      <div class="tier__cost"><span class="coin tier__coin"><svg class="i "><use href="#i-star"/></svg></span><b>10</b><span class="lv">LV.3</span></div>
+      <div class="tier__main"><h3>Medium Reward</h3><p class="tier__ex">Ice cream  ·  Donut with Dad  ·  Coloring book  ·  Craft kit  ·  Pool toy  ·  Playground + snack</p></div>
+      <div class="tier__ic"><svg class="i "><use href="#i-bag"/></svg></div></div><div class="tier">
+      <div class="tier__cost"><span class="coin tier__coin"><svg class="i "><use href="#i-star"/></svg></span><b>15</b><span class="lv">LV.4</span></div>
+      <div class="tier__main"><h3>Big Reward</h3><p class="tier__ex">Small toy  ·  New book  ·  Garden item  ·  Pick dinner  ·  Mini golf  ·  Special outing</p></div>
+      <div class="tier__ic"><svg class="i "><use href="#i-star"/></svg></div></div><div class="tier">
+      <div class="tier__cost"><span class="coin tier__coin"><svg class="i "><use href="#i-star"/></svg></span><b>22–25</b><span class="lv">LV.5</span></div>
+      <div class="tier__main"><h3>Legendary Week</h3><p class="tier__ex">Zoo or farm  ·  Big craft kit  ·  Bigger toy  ·  Date with Mom or Dad  ·  Peri Day</p></div>
+      <div class="tier__ic"><svg class="i "><use href="#i-trophy"/></svg></div></div></div>
+  <div class="shop-foot">
+    <div class="sf c-shop"><svg class="i "><use href="#i-gift"/></svg><div><b>Daily Bonus</b><span>All 4 quests in one day = draw a Mystery Prize, +3 points, or a 3-point pick.</span></div></div>
+    <div class="sf c-gold"><svg class="i "><use href="#i-key"/></svg><div><b>Spend or save</b><span>Buy now, or save toward a bigger reward. Friday is big shop day.</span></div></div>
+  </div><div class="pageno">QUEST SHOP</div></section>
+<section class="sheet" data-screen-label="Point Bank">
+  <div class="pagehead"><span class="medallion medallion--med c-gold"><svg class="i "><use href="#i-star"/></svg></span><div><div class="kicker">Dry-erase · count after dinner</div><h1 class="h-page title-pop" style="color:var(--gold-ink)">My Quest Point Bank</h1><p class="h-sub">How many Quest Points do you have right now?</p></div></div>
+  <div class="bank-big"><span class="coin"><svg class="i "><use href="#i-star"/></svg></span><span class="txt">I have <span class="box"></span> Quest Points</span></div>
+  <div class="bank-choices">
+    <div class="bank-choice c-shop"><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-candy"/></svg></span><b>Spend now</b><span>Get a small treat today.</span></div>
+    <div class="bank-choice c-gold"><span class="medallion medallion--med c-gold"><svg class="i "><use href="#i-chest"/></svg></span><b>Save up</b><span>Stack points for a big reward.</span></div>
+    <div class="bank-choice c-parent"><span class="medallion medallion--med c-parent"><svg class="i "><use href="#i-crown"/></svg></span><b>Big shop Friday</b><span>Best day to spend saved points.</span></div>
+  </div>
+  <div class="dryerase"><svg class="i "><use href="#i-loop"/></svg> &nbsp;Laminate me — wipe and re-count every day with a dry-erase marker.</div><div class="pageno">POINT BANK</div></section>
+<section class="sheet" data-screen-label="Weekly Review">
+  <div class="pagehead"><span class="medallion medallion--med c-parent"><svg class="i "><use href="#i-trophy"/></svg></span><div><div class="kicker">Friday · 5 minutes together</div><h1 class="h-page title-pop" style="color:var(--parent-ink)">Weekly Quest Review</h1><p class="h-sub">Look back at the week, then choose a reward.</p></div></div>
+  <div class="wk-grid">
+    <div class="wk-field wk-span c-gold"><div class="lbl"><svg class="i "><use href="#i-star"/></svg> This week’s points</div>
+      <div class="wk-nums"><div class="n c-gold"><small>EARNED</small><div class="box"></div></div><div class="n c-shop"><small>SPENT</small><div class="box"></div></div><div class="n c-reset"><small>SAVED</small><div class="box"></div></div></div></div>
+    <div class="wk-field c-sister"><div class="lbl"><svg class="i "><use href="#i-heart"/></svg> My favorite quest was…</div><div class="write"></div></div>
+    <div class="wk-field c-helper"><div class="lbl"><svg class="i "><use href="#i-house"/></svg> A job I am proud of…</div><div class="write"></div></div>
+    <div class="wk-field c-brain"><div class="lbl"><svg class="i "><use href="#i-flask"/></svg> Something that was hard…</div><div class="write"></div></div>
+    <div class="wk-field c-body"><div class="lbl"><svg class="i "><use href="#i-sprout"/></svg> What I want next week…</div><div class="write"></div></div>
+    <div class="wk-field wk-span c-shop"><div class="lbl"><svg class="i "><use href="#i-gift"/></svg> Reward I chose</div><div class="write" style="min-height:.5in"></div></div>
+  </div><div class="pageno">WEEKLY REVIEW</div></section>
+<section class="sheet" data-screen-label="Parent Daily">
+  <div class="pagehead"><span class="medallion medallion--med c-parent"><svg class="i "><use href="#i-bubble"/></svg></span><div><div class="kicker">Keep this one close · for grown-ups</div><h1 class="h-page title-pop" style="color:var(--parent-ink)">Parent Daily Card</h1><p class="h-sub">The whole day in one glance — plus the three rules that make it work.</p></div></div>
+  <div class="two">
+    <div class="col">
+      <div class="block c-parent"><h4><svg class="i "><use href="#i-loop"/></svg> The day, in order</h4><ul class="flow"><li><span class="checkbox c-parent"></span>Morning Helper Reset</li><li><span class="checkbox c-parent"></span>Brain Quest during William’s nap</li><li><span class="checkbox c-parent"></span>Body / Nature Quest with both kids</li><li><span class="checkbox c-parent"></span>Evening Reset before dinner</li><li><span class="checkbox c-parent"></span>Count the points after dinner</li><li><span class="checkbox c-parent"></span>Daily Bonus if all 4 quests earned</li></ul></div>
+      <div class="block c-gold"><h4><svg class="i "><use href="#i-star"/></svg> Minimum viable day</h4><p class="muted" style="font-size:15px;line-height:1.4;margin:0">On a rough day, keep only: <b>one</b> helper job, <b>one</b> tiny Brain Quest, <b>one</b> body or outside moment, and <b>one</b> calm reset. That still counts.</p></div>
+    </div>
+    <div class="col">
+      <div class="block"><h4><svg class="i "><use href="#i-key"/></svg> The three house rules</h4>
+        <div class="ruleblock"><b>Do not remove earned points.</b> Repair behavior separately with a logical consequence.</div>
+        <div class="ruleblock" style="margin-top:.12in"><b>The task can shrink, but it never disappears.</b> Three toys instead of ten — the job still happens.</div>
+        <div class="ruleblock" style="margin-top:.12in"><b>Award Big Sister points immediately.</b> Catch the kindness the second you see it.</div>
+      </div>
+      <div class="block c-sister"><h4><svg class="i "><use href="#i-bubble"/></svg> Repair script</h4><p class="muted" style="font-size:15px;line-height:1.4;margin:0">“You were mad. It’s okay to be mad. It’s not okay to grab. Now we repair.”</p></div>
+    </div>
+  </div><div class="pageno">PARENT CARD</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--4"><div class="cut"><article class="card c-shop dcard tcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-shop"><svg class="i "><use href="#i-candy"/></svg></span><div><div class="kicker">LV.1 reward</div><h3 class="h-card">Tiny Treat</h3></div></div>
+      <span class="rar"><svg class="i "><use href="#i-star"/></svg></span><ul><li>Sticker</li><li>Tattoo</li><li>Pick a song</li><li>Dad game</li></ul>
+      <div class="tcost"><span class="coin"><svg class="i "><use href="#i-star"/></svg></span><b>3 POINTS</b></div></div></article></div><div class="cut"><article class="card c-shop dcard tcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-shop"><svg class="i "><use href="#i-gift"/></svg></span><div><div class="kicker">LV.2 reward</div><h3 class="h-card">Small Prize</h3></div></div>
+      <span class="rar"><svg class="i "><use href="#i-star"/></svg><svg class="i "><use href="#i-star"/></svg></span><ul><li>Treasure box</li><li>Lollipop</li><li>Bubbles</li><li>Extra story</li><li>Pick dessert</li></ul>
+      <div class="tcost"><span class="coin"><svg class="i "><use href="#i-star"/></svg></span><b>6 POINTS</b></div></div></article></div><div class="cut"><article class="card c-shop dcard tcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-shop"><svg class="i "><use href="#i-bag"/></svg></span><div><div class="kicker">LV.3 reward</div><h3 class="h-card">Medium Reward</h3></div></div>
+      <span class="rar"><svg class="i "><use href="#i-star"/></svg><svg class="i "><use href="#i-star"/></svg><svg class="i "><use href="#i-star"/></svg></span><ul><li>Ice cream</li><li>Donut with Dad</li><li>Coloring book</li><li>Craft kit</li><li>Pool toy</li><li>Playground + snack</li></ul>
+      <div class="tcost"><span class="coin"><svg class="i "><use href="#i-star"/></svg></span><b>10 POINTS</b></div></div></article></div><div class="cut"><article class="card c-shop dcard tcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-shop"><svg class="i "><use href="#i-star"/></svg></span><div><div class="kicker">LV.4 reward</div><h3 class="h-card">Big Reward</h3></div></div>
+      <span class="rar"><svg class="i "><use href="#i-star"/></svg><svg class="i "><use href="#i-star"/></svg><svg class="i "><use href="#i-star"/></svg><svg class="i "><use href="#i-star"/></svg></span><ul><li>Small toy</li><li>New book</li><li>Garden item</li><li>Pick dinner</li><li>Mini golf</li><li>Special outing</li></ul>
+      <div class="tcost"><span class="coin"><svg class="i "><use href="#i-star"/></svg></span><b>15 POINTS</b></div></div></article></div></div><div class="deck-foot">✂  Print on cardstock · laminate · trim on the dashed line</div><div class="pageno">REWARD CARDS · 1–4</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--2"><div class="cut"><article class="card c-shop hero"><div class="hero__rail"><span class="medallion medallion--lg c-shop"><svg class="i "><use href="#i-trophy"/></svg></span></div>
+    <div class="hero__body"><div class="kicker">LV.5 · the big one</div><h3 class="h-card hero__title">Legendary Week</h3><span class="rar"><svg class="i "><use href="#i-star"/></svg><svg class="i "><use href="#i-star"/></svg><svg class="i "><use href="#i-star"/></svg><svg class="i "><use href="#i-star"/></svg><svg class="i "><use href="#i-star"/></svg></span><ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.08in .2in"><li style="display:flex;gap:.1in;align-items:center;font-size:16px"><span style="width:.13in;height:.13in;border-radius:50%;background:var(--shop);flex:none"></span>Zoo or farm</li><li style="display:flex;gap:.1in;align-items:center;font-size:16px"><span style="width:.13in;height:.13in;border-radius:50%;background:var(--shop);flex:none"></span>Big craft kit</li><li style="display:flex;gap:.1in;align-items:center;font-size:16px"><span style="width:.13in;height:.13in;border-radius:50%;background:var(--shop);flex:none"></span>Bigger toy</li><li style="display:flex;gap:.1in;align-items:center;font-size:16px"><span style="width:.13in;height:.13in;border-radius:50%;background:var(--shop);flex:none"></span>Date with Mom or Dad</li><li style="display:flex;gap:.1in;align-items:center;font-size:16px"><span style="width:.13in;height:.13in;border-radius:50%;background:var(--shop);flex:none"></span>Peri Day</li></ul><div style="display:flex;align-items:center;gap:.14in;margin-top:.04in"><span class="coin" style="font-size:.5in"><svg class="i "><use href="#i-star"/></svg></span><b style="font-family:var(--arcade);font-size:14px;color:var(--gold-ink)">22–25 POINTS</b></div></div></article></div><div class="cut"><article class="card c-shop hero"><div class="hero__rail"><span class="medallion medallion--lg c-shop"><svg class="i "><use href="#i-gift"/></svg></span></div>
+    <div class="hero__body"><div class="kicker">All 4 quests in one day</div><h3 class="h-card hero__title">Daily Bonus!</h3><p class="muted" style="margin:0;font-size:16px">Do all 4 quests today. Then pick one:</p><ul class="bonus-list"><li><span class="or"><svg class="i "><use href="#i-die"/></svg></span>Draw a mystery card</li><li><span class="or"><svg class="i "><use href="#i-star"/></svg></span>Get 3 bonus points</li><li><span class="or"><svg class="i "><use href="#i-candy"/></svg></span>Pick a tiny treat</li></ul></div></article></div></div><div class="pageno">REWARD CARDS · 5 + BONUS</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--2"><div class="cut"><article class="card c-gold hero"><div class="hero__rail"><span class="medallion medallion--lg c-gold"><svg class="i "><use href="#i-key"/></svg></span></div>
+    <div class="hero__body"><div class="kicker">You earned points</div><h3 class="h-card hero__title">Spend or Save?</h3><ul class="bonus-list"><li><span class="or"><svg class="i "><use href="#i-bag"/></svg></span><div><b>Spend now</b> — a small treat today</div></li><li><span class="or"><svg class="i "><use href="#i-chest"/></svg></span><div><b>Save up</b> — a big reward later</div></li></ul><div class="script"><span class="lbl">Grown-up says</span>“You can buy this now, or save for something bigger.”</div></div></article></div><div class="cut"><article class="card c-brain hero"><div class="hero__rail"><span class="medallion medallion--lg c-brain"><svg class="i "><use href="#i-timer"/></svg></span></div>
+    <div class="hero__body"><div class="kicker">For grown-ups · brain practice only</div><h3 class="h-card hero__title">Skittle Sprint</h3><ol class="steps"><li><span class="num">1</span><span>Set a 3–5 minute timer</span></li><li><span class="num">2</span><span>Use it for reading, phonics, or math</span></li><li><span class="num">3</span><span>Stop the moment the timer ends</span></li><li><span class="num">4</span><span>Earn the Brain Quest Point for effort</span></li></ol><div class="notfor">Not for: <span class="p">chores</span><span class="p">tantrums</span><span class="p">being kind</span><span class="p">meals</span></div></div></article></div></div><div class="pageno">CHOICE + SKITTLE CARDS</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--2"><div class="cut"><article class="card c-reset hero"><div class="hero__rail"><span class="medallion medallion--lg c-reset"><svg class="i "><use href="#i-sun"/></svg></span></div>
+    <div class="hero__body"><div class="kicker">After breakfast</div><h3 class="h-card hero__title">Morning Reset</h3><ul class="checks"><li><span class="checkbox"></span>Plate in the sink</li><li><span class="checkbox"></span>PJs in the hamper</li><li><span class="checkbox"></span>Shoes at the door</li><li><span class="checkbox"></span>One helper job</li></ul><div class="script"><span class="lbl">Grown-up says</span>“Plate, PJs, shoes. Then we start the day.”</div></div></article></div><div class="cut"><article class="card c-reset hero"><div class="hero__rail"><span class="medallion medallion--lg c-reset"><svg class="i "><use href="#i-moon"/></svg></span></div>
+    <div class="hero__body"><div class="kicker">Before dinner</div><h3 class="h-card hero__title">Evening Reset</h3><ul class="checks"><li><span class="checkbox"></span>Toys in the bins</li><li><span class="checkbox"></span>Books on the shelf</li><li><span class="checkbox"></span>Clothes in the hamper</li><li><span class="checkbox"></span>Clear the floor</li></ul><div class="script"><span class="lbl">Grown-up says</span>“Before dinner, we reset the house.”</div></div></article></div></div><div class="pageno">RESET CARDS · A.M. / P.M.</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--2"><div class="cut"><article class="card c-reset hero"><div class="hero__rail"><span class="medallion medallion--lg c-reset"><svg class="i "><use href="#i-bed"/></svg></span></div>
+    <div class="hero__body"><div class="kicker">Make the room match the card</div><h3 class="h-card hero__title">Room Reset</h3><ul class="checks"><li><span class="checkbox"></span>Books on the shelf</li><li><span class="checkbox"></span>Animals in the basket</li><li><span class="checkbox"></span>Clothes in the hamper</li><li><span class="checkbox"></span>Toys in the bins</li><li><span class="checkbox"></span>Clear the floor</li></ul></div></article></div><div class="cut"><article class="card c-shop hero"><div class="hero__rail"><span class="medallion medallion--lg c-shop"><svg class="i "><use href="#i-chest"/></svg></span></div>
+    <div class="hero__body"><div class="kicker">6 points · pick one</div><h3 class="h-card hero__title">Treasure Box</h3><div style="display:flex;align-items:center;gap:.18in;background:var(--shop-soft);border-radius:18px;padding:.2in"><span class="coin" style="font-size:.6in"><svg class="i "><use href="#i-star"/></svg></span><div><div style="font-weight:700;font-size:23px;color:var(--shop-ink)">6 points — pick one</div><div class="muted" style="font-size:15px">Fill it with cheap, exciting little prizes.</div></div></div><div class="script"><span class="lbl">Rule</span>“Ask first. Shop time only.”</div></div></article></div></div><div class="pageno">ROOM RESET + TREASURE BOX</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--2"><div class="cut"><article class="card c-gold hero"><div class="hero__rail"><span class="medallion medallion--lg c-gold"><svg class="i "><use href="#i-star"/></svg></span></div>
+    <div class="hero__body"><div class="kicker">Pocket version</div><h3 class="h-card hero__title">My Point Bank</h3><div class="bigfill" style="font-size:22px">I have <span class="box" style="height:.7in;border-color:var(--gold)"></span> points</div><div class="notfor" style="font-size:14.5px"><span class="p">Spend now</span><span class="p">Save up</span><span class="p">Big shop Friday</span></div></div></article></div><div class="cut"><article class="card c-shop hero"><div class="hero__rail"><span class="medallion medallion--lg c-shop"><svg class="i "><use href="#i-die"/></svg></span></div>
+    <div class="hero__body"><div class="kicker">Face-down deck</div><h3 class="h-card hero__title">Mystery Prize</h3><p class="muted" style="margin:0;font-size:17px;line-height:1.4">Get one when you do <b>all 4 quests</b> in a day — or buy one for <b>4 points</b>.</p><div class="script"><span class="lbl">For grown-ups</span>Keep the outcomes parent-approved. Shuffle and let her draw one.</div></div></article></div></div><div class="pageno">POINT BANK + MYSTERY RULES</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--4"><div class="cut"><article class="card c-helper dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-helper"><svg class="i "><use href="#i-plate"/></svg></span><div><div class="kicker">Helper Quest</div><h3 class="h-card">Clear Plate</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Plate in sink</span></li><li><span class="num">2</span><span>Food in trash</span></li><li><span class="num">3</span><span>Push your chair</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Helper Point</div>
+    </div></article></div><div class="cut"><article class="card c-helper dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-helper"><svg class="i "><use href="#i-table"/></svg></span><div><div class="kicker">Helper Quest</div><h3 class="h-card">Wipe Table</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Get a wet rag</span></li><li><span class="num">2</span><span>Wipe big circles</span></li><li><span class="num">3</span><span>Rinse the rag</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Helper Point</div>
+    </div></article></div><div class="cut"><article class="card c-helper dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-helper"><svg class="i "><use href="#i-sprout"/></svg></span><div><div class="kicker">Helper Quest</div><h3 class="h-card">Water Plants</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Fill the cup</span></li><li><span class="num">2</span><span>Pour on dirt</span></li><li><span class="num">3</span><span>Feel for wet</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Helper Point</div>
+    </div></article></div><div class="cut"><article class="card c-helper dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-helper"><svg class="i "><use href="#i-basket"/></svg></span><div><div class="kicker">Helper Quest</div><h3 class="h-card">Sort Laundry</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Lights pile</span></li><li><span class="num">2</span><span>Darks pile</span></li><li><span class="num">3</span><span>Socks aside</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Helper Point</div>
+    </div></article></div></div><div class="pageno">HELPER JOB CARDS · 1</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--4"><div class="cut"><article class="card c-helper dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-helper"><svg class="i "><use href="#i-sock"/></svg></span><div><div class="kicker">Helper Quest</div><h3 class="h-card">Match Socks</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Find a match</span></li><li><span class="num">2</span><span>Fold them up</span></li><li><span class="num">3</span><span>In the drawer</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Helper Point</div>
+    </div></article></div><div class="cut"><article class="card c-helper dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-helper"><svg class="i "><use href="#i-droplet"/></svg></span><div><div class="kicker">Helper Quest</div><h3 class="h-card">Pool Cleanup</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Toys in bin</span></li><li><span class="num">2</span><span>Towels on hook</span></li><li><span class="num">3</span><span>Shut the gate</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Helper Point</div>
+    </div></article></div><div class="cut"><article class="card c-helper dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-helper"><svg class="i "><use href="#i-plate"/></svg></span><div><div class="kicker">Helper Quest</div><h3 class="h-card">Set Table</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>A plate each</span></li><li><span class="num">2</span><span>Fork and cup</span></li><li><span class="num">3</span><span>A napkin each</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Helper Point</div>
+    </div></article></div><div class="cut"><article class="card c-helper dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-helper"><svg class="i "><use href="#i-box"/></svg></span><div><div class="kicker">Helper Quest</div><h3 class="h-card">Toy Reset</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Get a bin</span></li><li><span class="num">2</span><span>Five toys in</span></li><li><span class="num">3</span><span>Do it again</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Helper Point</div>
+    </div></article></div></div><div class="pageno">HELPER JOB CARDS · 2</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--4"><div class="cut"><article class="card c-helper dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-helper"><svg class="i "><use href="#i-paw"/></svg></span><div><div class="kicker">Helper Quest</div><h3 class="h-card">Animal Check</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Fresh water</span></li><li><span class="num">2</span><span>Check food</span></li><li><span class="num">3</span><span>Soft pet hi</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Helper Point</div>
+    </div></article></div><div class="cut"><article class="card c-helper dcard tipcard"><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-helper"><svg class="i "><use href="#i-house"/></svg></span><h3 class="h-card">How to teach a chore</h3></div>
+      <div class="parent-flag"><svg class="i "><use href="#i-bubble"/></svg> For grown-ups</div><ol class="steps"><li><span class="num">1</span><span>Name the job out loud</span></li><li><span class="num">2</span><span>Show the finish line</span></li><li><span class="num">3</span><span>Do one together</span></li><li><span class="num">4</span><span>Set a tiny target — just 5</span></li><li><span class="num">5</span><span>Give the point right away</span></li></ol>
+    </div></article></div><div class="cut"><article class="card c-helper dcard tipcard"><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-helper"><svg class="i "><use href="#i-droplet"/></svg></span><h3 class="h-card">Mopping = bonus job</h3></div>
+      <div class="parent-flag"><svg class="i "><use href="#i-bubble"/></svg> For grown-ups</div><p>A high-status helper job — not a daily must. Give one small zone, use a timer, let it feel special. It never replaces basic cleanup.</p>
+    </div></article></div><div class="cut"><article class="card c-helper dcard tipcard"><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-helper"><svg class="i "><use href="#i-check"/></svg></span><h3 class="h-card">Make the finish line visible</h3></div>
+      <div class="parent-flag"><svg class="i "><use href="#i-bubble"/></svg> For grown-ups</div><p>Point to the bin. Name the shelf. Count the items. Five-year-olds finish what they can <b>see</b> ending.</p>
+    </div></article></div></div><div class="pageno">HELPER JOB CARDS · 3</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--4"><div class="cut"><article class="card c-brain dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-brain"><svg class="i "><use href="#i-book"/></svg></span><div><div class="kicker">Brain Quest</div><h3 class="h-card">Reading Quest</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Read a page</span></li><li><span class="num">2</span><span>Sound out words</span></li><li><span class="num">3</span><span>Read a book</span></li><li><span class="num">4</span><span>Tell one thing</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Brain Point</div>
+    </div></article></div><div class="cut"><article class="card c-brain dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-brain"><svg class="i "><use href="#i-flash"/></svg></span><div><div class="kicker">Brain Quest</div><h3 class="h-card">Sight Word Quest</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Flip five cards</span></li><li><span class="num">2</span><span>Say them fast</span></li><li><span class="num">3</span><span>Use one word</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Brain Point</div>
+    </div></article></div><div class="cut"><article class="card c-brain dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-brain"><svg class="i "><use href="#i-numline"/></svg></span><div><div class="kicker">Brain Quest</div><h3 class="h-card">Math Jumps Quest</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Pick a number</span></li><li><span class="num">2</span><span>Jump up or back</span></li><li><span class="num">3</span><span>Land on it</span></li><li><span class="num">4</span><span>Try a big jump</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Brain Point</div>
+    </div></article></div><div class="cut"><article class="card c-brain dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-brain"><svg class="i "><use href="#i-pencil"/></svg></span><div><div class="kicker">Brain Quest</div><h3 class="h-card">Writing Quest</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Pick one thing</span></li><li><span class="num">2</span><span>Say it out loud</span></li><li><span class="num">3</span><span>Write one line</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Brain Point</div>
+    </div></article></div></div><div class="pageno">BRAIN QUEST CARDS · 1</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--4"><div class="cut"><article class="card c-brain dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-brain"><svg class="i "><use href="#i-flask"/></svg></span><div><div class="kicker">Brain Quest</div><h3 class="h-card">Science Quest</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>What do you see?</span></li><li><span class="num">2</span><span>What will happen?</span></li><li><span class="num">3</span><span>Try it</span></li><li><span class="num">4</span><span>What changed?</span></li></ol><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Brain Point</div>
+    </div></article></div><div class="cut"><article class="card c-brain dcard tipcard"><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-brain"><svg class="i "><use href="#i-book"/></svg></span><h3 class="h-card">Reading lesson recipe</h3></div>
+      <div class="parent-flag"><svg class="i "><use href="#i-bubble"/></svg> For grown-ups</div><ol class="steps"><li><span class="num">1</span><span>Easy win — a page she knows</span></li><li><span class="num">2</span><span>New challenge — 3–5 harder words</span></li><li><span class="num">3</span><span>Apply — read a sentence or mini-book</span></li><li><span class="num">4</span><span>Brain Point for focused effort</span></li></ol>
+    </div></article></div><div class="cut"><article class="card c-brain dcard tipcard"><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-brain"><svg class="i "><use href="#i-star"/></svg></span><h3 class="h-card">Effort earns the point</h3></div>
+      <div class="parent-flag"><svg class="i "><use href="#i-bubble"/></svg> For grown-ups</div><p>The Brain Quest Point is for <b>focused effort</b>, not perfect answers. Reward the trying.</p>
+    </div></article></div><div class="cut"><article class="card c-brain dcard tipcard"><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-brain"><svg class="i "><use href="#i-timer"/></svg></span><h3 class="h-card">Skittles, contained</h3></div>
+      <div class="parent-flag"><svg class="i "><use href="#i-bubble"/></svg> For grown-ups</div><p>Mini Skittles are for short skill games only — never for chores, kindness, meals, or calming down.</p>
+    </div></article></div></div><div class="pageno">BRAIN QUEST CARDS · 2</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--4"><div class="cut"><article class="card c-sister dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-sister"><svg class="i "><use href="#i-bubble"/></svg></span><div><div class="kicker">Big Sister Quest</div><h3 class="h-card">Teach William</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Sit by him</span></li><li><span class="num">2</span><span>Go slow</span></li><li><span class="num">3</span><span>Cheer him on</span></li></ol><div class="script"><span class="lbl">Say</span>“Watch me, Will.”</div><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Big Sister Point</div>
+    </div></article></div><div class="cut"><article class="card c-sister dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-sister"><svg class="i "><use href="#i-swap"/></svg></span><div><div class="kicker">Big Sister Quest</div><h3 class="h-card">Trade Toy</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Find a baby toy</span></li><li><span class="num">2</span><span>Offer a trade</span></li><li><span class="num">3</span><span>Let him take it</span></li></ol><div class="script"><span class="lbl">Say</span>“Trade, Will?”</div><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Big Sister Point</div>
+    </div></article></div><div class="cut"><article class="card c-sister dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-sister"><svg class="i "><use href="#i-hand"/></svg></span><div><div class="kicker">Big Sister Quest</div><h3 class="h-card">Ask for Help</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Stop</span></li><li><span class="num">2</span><span>Use your words</span></li><li><span class="num">3</span><span>Find a grown-up</span></li></ol><div class="script"><span class="lbl">Say</span>“Dad, I need help.”</div><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Big Sister Point</div>
+    </div></article></div><div class="cut"><article class="card c-sister dcard"><div class="card__bar"></div><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-sister"><svg class="i "><use href="#i-heart"/></svg></span><div><div class="kicker">Big Sister Quest</div><h3 class="h-card">Repair Card</h3></div></div>
+      <ol class="steps"><li><span class="num">1</span><span>Take a breath</span></li><li><span class="num">2</span><span>Give it back</span></li><li><span class="num">3</span><span>Be kind again</span></li></ol><div class="script"><span class="lbl">Say</span>“Sorry. Let’s fix it.”</div><div class="earn"><svg class="i "><use href="#i-star"/></svg> Earn a Big Sister Point</div>
+    </div></article></div></div><div class="pageno">BIG SISTER CARDS</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--4"><div class="cut"><article class="card c-sister dcard tipcard"><div class="card__body">
+      <div class="dcard__head"><span class="medallion medallion--sm c-sister"><svg class="i "><use href="#i-swap"/></svg></span><h3 class="h-card">Sort every toy</h3></div>
+      <div class="parent-flag"><svg class="i "><use href="#i-bubble"/></svg> For grown-ups</div><p>Three bins, three labels. Teaching William starts with knowing whose toy is whose.</p><ul style="list-style:none;padding:0;margin:.06in 0 0;display:flex;flex-direction:column;gap:.08in;font-size:15px"><li><svg class="i "><use href="#i-baby"/></svg> &nbsp;Baby toys — he can touch</li><li><svg class="i "><use href="#i-lock"/></svg> &nbsp;Peri only — up high</li><li><svg class="i "><use href="#i-people"/></svg> &nbsp;Share toys — take turns</li></ul>
+    </div></article></div><div class="cut"><article class="card c-body dcard signcard"><div class="card__bar"></div><span class="medallion medallion--lg c-body"><svg class="i "><use href="#i-baby"/></svg></span><h3>Baby Toys</h3><p>William can play with these.</p></article></div><div class="cut"><article class="card c-sister dcard signcard"><div class="card__bar"></div><span class="medallion medallion--lg c-sister"><svg class="i "><use href="#i-lock"/></svg></span><h3>Peri Only</h3><p>My special things. Up high.</p></article></div><div class="cut"><article class="card c-helper dcard signcard"><div class="card__bar"></div><span class="medallion medallion--lg c-helper"><svg class="i "><use href="#i-people"/></svg></span><h3>Share Toys</h3><p>We take turns with these.</p></article></div></div><div class="pageno">TOY-SORT SIGNS</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--9"><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-cake"/></svg></span><b>Pick dessert</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-candy"/></svg></span><b>5 Skittles</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-book"/></svg></span><b>Extra story</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-sun"/></svg></span><b>Pick breakfast</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-pencil"/></svg></span><b>Dad draws</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-bunny"/></svg></span><b>Hoppity time</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-note"/></svg></span><b>Pick a song</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-droplet"/></svg></span><b>Bubble bath</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-basket"/></svg></span><b>Snack outside</b></div></div></div><div class="deck-foot">✂  Trim into cards · keep the deck face-down</div><div class="pageno">MYSTERY PRIZES · FRONT 1</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--9"><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-tv"/></svg></span><b>10 min show</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-chest"/></svg></span><b>Treasure box</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-crown"/></svg></span><b>Princess dress</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-popcorn"/></svg></span><b>Make popcorn</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-die"/></svg></span><b>Pick a game</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-coin"/></svg></span><b>+2 points</b></div></div><div class="cut"><div class="mcard"><div class="tag">MYSTERY PRIZE</div><span class="medallion medallion--med c-shop"><svg class="i "><use href="#i-book"/></svg></span><b>Pick Will’s book</b></div></div></div><div class="deck-foot">✂  Trim into cards · keep the deck face-down</div><div class="pageno">MYSTERY PRIZES · FRONT 2</div></section>
+<section class="sheet" data-screen-label=""><div class="cutgrid cutgrid--9"><div class="cut"><div class="mback"><small>QUEST SHOP</small><div class="medallion"><svg class="i "><use href="#i-die"/></svg></div><div class="q">?</div><small>MYSTERY PRIZE</small></div></div><div class="cut"><div class="mback"><small>QUEST SHOP</small><div class="medallion"><svg class="i "><use href="#i-die"/></svg></div><div class="q">?</div><small>MYSTERY PRIZE</small></div></div><div class="cut"><div class="mback"><small>QUEST SHOP</small><div class="medallion"><svg class="i "><use href="#i-die"/></svg></div><div class="q">?</div><small>MYSTERY PRIZE</small></div></div><div class="cut"><div class="mback"><small>QUEST SHOP</small><div class="medallion"><svg class="i "><use href="#i-die"/></svg></div><div class="q">?</div><small>MYSTERY PRIZE</small></div></div><div class="cut"><div class="mback"><small>QUEST SHOP</small><div class="medallion"><svg class="i "><use href="#i-die"/></svg></div><div class="q">?</div><small>MYSTERY PRIZE</small></div></div><div class="cut"><div class="mback"><small>QUEST SHOP</small><div class="medallion"><svg class="i "><use href="#i-die"/></svg></div><div class="q">?</div><small>MYSTERY PRIZE</small></div></div><div class="cut"><div class="mback"><small>QUEST SHOP</small><div class="medallion"><svg class="i "><use href="#i-die"/></svg></div><div class="q">?</div><small>MYSTERY PRIZE</small></div></div><div class="cut"><div class="mback"><small>QUEST SHOP</small><div class="medallion"><svg class="i "><use href="#i-die"/></svg></div><div class="q">?</div><small>MYSTERY PRIZE</small></div></div><div class="cut"><div class="mback"><small>QUEST SHOP</small><div class="medallion"><svg class="i "><use href="#i-die"/></svg></div><div class="q">?</div><small>MYSTERY PRIZE</small></div></div></div><div class="deck-foot">Print on the reverse of the front sheets</div><div class="pageno">MYSTERY PRIZES · BACK</div></section>
+</div>
+</body>
+</html>

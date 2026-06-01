@@ -1,0 +1,282 @@
+/* =====================================================================
+   PERI'S SUMMER QUEST KIT — design system
+   Rounded + bouncy storybook, with soft arcade/quest-game HUD energy.
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Press+Start+2P&display=swap');
+
+:root{
+  /* paper + ink */
+  --paper:#FCEFF4;        /* soft warm pink page */
+  --paper-2:#F8E2EC;
+  --ink:#3B2A39;          /* warm near-black */
+  --ink-soft:#6E5566;
+  --ink-faint:#9C8593;
+  --card:#FFFFFF;
+  --line:#ECD7E1;
+
+  /* quest colours — main / ink(dark text) / soft(tint bg) */
+  --brain:#2F7DC4;  --brain-ink:#184C7C;  --brain-soft:#E7F1FA;
+  --body:#3BA152;   --body-ink:#1C6630;   --body-soft:#E5F4E9;
+  --helper:#E0991A; --helper-ink:#7E5300; --helper-soft:#FBEFD3;
+  --sister:#E5559A; --sister-ink:#9C2566; --sister-soft:#FCE6F1;
+  --shop:#F2663C;   --shop-ink:#A53C1D;   --shop-soft:#FDE7DE;
+  --parent:#7E5BD0; --parent-ink:#492C95; --parent-soft:#EDE7FB;
+  --reset:#1AA39B;  --reset-ink:#0A5F5A;  --reset-soft:#E0F4F2;
+
+  /* currency */
+  --gold:#F3B100;
+  --gold-ink:#9A6E00;
+  --star:#FFC83D;
+
+  /* shape */
+  --r-sm:14px; --r:24px; --r-lg:34px; --r-xl:44px;
+  --shadow-card:0 10px 26px rgba(59,42,57,.10);
+  --shadow-soft:0 6px 16px rgba(59,42,57,.08);
+
+  --font:'Fredoka', ui-rounded, "Segoe UI", system-ui, sans-serif;
+  --arcade:'Press Start 2P', monospace;
+
+  /* physical page */
+  --pad:0.62in;
+}
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  font-family:var(--font);
+  color:var(--ink);
+  background:#E7D4DE;          /* desk colour behind the sheets (screen only) */
+  -webkit-font-smoothing:antialiased;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+/* ============================ PAGES ============================ */
+.book{
+  display:flex; flex-direction:column; align-items:center;
+  gap:26px; padding:34px 18px 60px;
+}
+.sheet{
+  width:8.5in; height:11in;
+  background:var(--paper);
+  position:relative; overflow:hidden;
+  box-shadow:0 14px 40px rgba(59,42,57,.22);
+  border-radius:4px;
+  padding:var(--pad);
+  display:flex; flex-direction:column;
+}
+.sheet__bleed{ /* full-bleed coloured background helper */
+  position:absolute; inset:0; z-index:0;
+}
+.sheet > *{ position:relative; z-index:1; }
+
+@media print{
+  @page{ size:letter portrait; margin:0; }
+  body{ background:#fff; }
+  .book{ gap:0; padding:0; }
+  .sheet{
+    box-shadow:none; border-radius:0;
+    break-after:page; page-break-after:always;
+    width:8.5in; height:11in;
+  }
+  .sheet:last-child{ break-after:auto; page-break-after:auto; }
+  .screen-only{ display:none !important; }
+}
+.screen-only{
+  color:#7a5d6c; font-size:13px; letter-spacing:.02em;
+}
+
+/* ============================ ICONS ============================ */
+.i{ width:1em; height:1em; display:inline-block; vertical-align:-0.14em; fill:currentColor; }
+.icon-sprite{ position:absolute; width:0; height:0; overflow:hidden; }
+
+/* ============================ TYPE ============================ */
+.kicker{
+  font-family:var(--arcade); font-size:9px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-soft);
+}
+.h-page{ font-weight:700; font-size:40px; line-height:1.04; letter-spacing:-.015em; margin:0; text-wrap:balance; }
+.h-sub{ font-weight:500; font-size:19px; color:var(--ink-soft); margin:6px 0 0; }
+.h-card{ font-weight:700; font-size:24px; line-height:1.08; margin:0; }
+
+.title-pop{ /* game-title style outline pop */
+  text-shadow:0 3px 0 rgba(59,42,57,.10);
+}
+
+/* ============================ QUEST TAG / CHIP ============================ */
+.qtag{
+  display:inline-flex; align-items:center; gap:.5em;
+  font-weight:600; font-size:16px; line-height:1;
+  padding:.5em .8em; border-radius:999px;
+  background:var(--c-soft); color:var(--c-ink);
+}
+.qtag .i{ font-size:1.25em; color:var(--c); }
+.qtag--solid{ background:var(--c); color:#fff; }
+.qtag--solid .i{ color:#fff; }
+
+/* colour binding utility */
+.c-brain{ --c:var(--brain); --c-ink:var(--brain-ink); --c-soft:var(--brain-soft); }
+.c-body{ --c:var(--body); --c-ink:var(--body-ink); --c-soft:var(--body-soft); }
+.c-helper{ --c:var(--helper); --c-ink:var(--helper-ink); --c-soft:var(--helper-soft); }
+.c-sister{ --c:var(--sister); --c-ink:var(--sister-ink); --c-soft:var(--sister-soft); }
+.c-shop{ --c:var(--shop); --c-ink:var(--shop-ink); --c-soft:var(--shop-soft); }
+.c-parent{ --c:var(--parent); --c-ink:var(--parent-ink); --c-soft:var(--parent-soft); }
+.c-reset{ --c:var(--reset); --c-ink:var(--reset-ink); --c-soft:var(--reset-soft); }
+.c-gold{ --c:var(--gold); --c-ink:var(--gold-ink); --c-soft:#FCEFC6; }
+
+/* ============================ COIN / POINTS ============================ */
+.coin{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:1.5em; height:1.5em; border-radius:50%;
+  background:radial-gradient(circle at 38% 32%, #FFE08A, var(--gold) 70%);
+  box-shadow:inset 0 0 0 .14em #fff3, 0 .12em 0 var(--gold-ink);
+  color:#fff; flex:none;
+}
+.coin .i{ font-size:.9em; }
+.coin-cost{
+  display:inline-flex; align-items:center; gap:.34em;
+  font-weight:700; color:var(--gold-ink);
+}
+.coin-cost .num{ font-family:var(--arcade); font-size:.78em; }
+
+/* big point readout (arcade) */
+.points-readout{
+  font-family:var(--arcade); color:var(--gold-ink);
+  letter-spacing:.02em;
+}
+
+/* ============================ CARDS ============================ */
+.card{
+  background:var(--card); border-radius:var(--r);
+  box-shadow:var(--shadow-card);
+  position:relative; overflow:hidden;
+  display:flex; flex-direction:column;
+}
+.card__bar{ height:.42in; background:var(--c); flex:none; }
+.card__body{ padding:.3in .32in .34in; display:flex; flex-direction:column; gap:.16in; flex:1; }
+
+/* HUD panel — rounded with corner notches */
+.panel{
+  background:var(--card); border-radius:var(--r);
+  box-shadow:var(--shadow-soft);
+  border:3px solid var(--c, var(--line));
+  position:relative;
+}
+
+/* ============================ STICKER SLOT & FILL LINE ============================ */
+.slot{
+  width:.62in; height:.62in; border-radius:50%;
+  border:2.5px dashed var(--c, var(--ink-faint));
+  background:#fff;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--c, var(--ink-faint)); opacity:.85;
+}
+.slot .i{ font-size:.3in; opacity:.45; }
+.slot--sq{ border-radius:12px; }
+
+.fillline{
+  border:none; border-bottom:2.5px dashed var(--ink-faint);
+  height:0; flex:1; align-self:flex-end;
+}
+.write-box{
+  border:2.5px dashed var(--c, var(--ink-faint));
+  border-radius:14px; background:#fff;
+}
+
+/* ============================ RIBBON / RANK ============================ */
+.ribbon{
+  display:inline-flex; align-items:center; gap:.4em;
+  font-family:var(--arcade); font-size:10px; letter-spacing:.06em;
+  color:#fff; background:var(--c); padding:.7em .8em;
+  border-radius:8px; box-shadow:0 .18em 0 var(--c-ink);
+}
+
+/* ============================ STEPS / CHECKLIST ============================ */
+.steps{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.13in; }
+.steps li{ display:flex; gap:.14in; align-items:flex-start; font-size:17px; line-height:1.3; font-weight:500; }
+.steps li > span:not(.num){ flex:1 1 auto; min-width:0; }
+.steps .num{
+  flex:none; width:1.5em; height:1.5em; border-radius:50%;
+  background:var(--c-soft); color:var(--c-ink); font-weight:700;
+  display:flex; align-items:center; justify-content:center; font-size:14px;
+}
+.checks{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.14in; }
+.checks li{ display:flex; gap:.16in; align-items:center; font-size:18.5px; font-weight:600; }
+.checkbox{
+  flex:none; width:1.45em; height:1.45em; border-radius:8px;
+  border:2.5px solid var(--c, var(--ink-faint)); background:#fff;
+}
+
+/* ============================ SCRIPT / QUOTE ============================ */
+.script{
+  background:var(--c-soft); border-radius:16px;
+  padding:.18in .22in; font-weight:500; font-size:16px; color:var(--c-ink);
+  line-height:1.3; position:relative;
+}
+.script .lbl{
+  font-family:var(--arcade); font-size:8px; letter-spacing:.1em;
+  text-transform:uppercase; opacity:.7; display:block; margin-bottom:.08in;
+}
+
+/* ============================ NOTE / EARN PILL ============================ */
+.earn{
+  margin-top:auto; display:inline-flex; align-items:center; gap:.45em;
+  align-self:flex-start;
+  background:var(--c); color:#fff; font-weight:600; font-size:14.5px;
+  padding:.5em .8em; border-radius:999px; box-shadow:0 .16em 0 var(--c-ink);
+}
+.earn .i{ font-size:1.15em; }
+
+/* ============================ CUT GUIDES ============================ */
+.cutgrid{ display:grid; gap:.34in; flex:1; align-content:start; }
+.cutgrid--2{ grid-template-columns:1fr; }              /* two 4x6 stacked */
+.cutgrid--4{ grid-template-columns:1fr 1fr; }          /* 2x2 deck cards */
+.cutgrid--9{ grid-template-columns:1fr 1fr 1fr; }      /* mystery */
+.cut{ position:relative; }
+.cut::before{
+  content:""; position:absolute; inset:-.16in;
+  border:1.5px dashed rgba(120,90,108,.32); border-radius:8px;
+  pointer-events:none;
+}
+
+/* ============================ LEGEND ============================ */
+.legend{ display:grid; grid-template-columns:1fr 1fr; gap:.2in .28in; }
+.legend-row{ display:flex; align-items:center; gap:.18in; }
+.legend-chip{
+  width:.5in; height:.5in; border-radius:14px; flex:none;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--c-soft); color:var(--c);
+}
+.legend-chip .i{ font-size:.3in; }
+.legend-row b{ font-weight:600; font-size:18px; }
+.legend-row span{ font-size:14.5px; color:var(--ink-soft); display:block; }
+
+/* ============================ MENU ROW (shop) ============================ */
+.tier{
+  display:grid; grid-template-columns:auto 1fr auto; gap:.26in; align-items:center;
+  background:#fff; border-radius:var(--r); padding:.24in .3in;
+  box-shadow:var(--shadow-soft); border-left:.16in solid var(--c);
+}
+
+/* ============================ MISC ============================ */
+.row{ display:flex; align-items:center; gap:.16in; }
+.between{ display:flex; align-items:center; justify-content:space-between; gap:.16in; }
+.wrap{ flex-wrap:wrap; }
+.muted{ color:var(--ink-soft); }
+.center{ text-align:center; }
+.grow{ flex:1; }
+.divider{ height:2px; background:var(--line); border-radius:2px; border:none; margin:.06in 0; }
+
+.pageno{
+  position:absolute; bottom:.26in; right:.4in; z-index:2;
+  font-family:var(--arcade); font-size:8px; color:var(--ink-faint);
+  letter-spacing:.08em;
+}
+.deck-foot{
+  font-family:var(--arcade); font-size:9px; color:var(--ink-faint);
+  letter-spacing:.06em; text-align:center; margin-top:.1in;
+}
+
+/* sparkle decoration */
+.spk{ color:var(--star); }
