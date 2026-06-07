@@ -1,73 +1,75 @@
 /* =====================================================================
-   PERI'S SUMMER QUEST KIT — design system
-   Rounded + bouncy storybook, with soft arcade/quest-game HUD energy.
+   PERI'S SUMMER QUEST ALMANAC — design system v3
+   Warm editorial children's field-guide. Print-first (US Letter portrait).
+   Tactile: every action is a STICKER RING or a DRY-ERASE field.
    ===================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap');
 
 :root{
   /* paper + ink */
-  --paper:#FCEFF4;        /* soft warm pink page */
-  --paper-2:#F8E2EC;
-  --ink:#3B2A39;          /* warm near-black */
-  --ink-soft:#6E5566;
-  --ink-faint:#9C8593;
-  --card:#FFFFFF;
-  --line:#ECD7E1;
+  --paper:#FBF6EE;
+  --paper-2:#F6EEE1;
+  --edge:#E7D8C2;          /* keyline plate frame */
+  --panel:#FFFFFF;
+  --ink:#382A37;
+  --ink-soft:#7B6B77;
+  --ink-faint:#B3A6B0;
 
-  /* quest colours — main / ink(dark text) / soft(tint bg) */
-  --brain:#2F7DC4;  --brain-ink:#184C7C;  --brain-soft:#E7F1FA;
-  --body:#3BA152;   --body-ink:#1C6630;   --body-soft:#E5F4E9;
-  --helper:#E0991A; --helper-ink:#7E5300; --helper-soft:#FBEFD3;
-  --sister:#E5559A; --sister-ink:#9C2566; --sister-soft:#FCE6F1;
-  --shop:#F2663C;   --shop-ink:#A53C1D;   --shop-soft:#FDE7DE;
-  --parent:#7E5BD0; --parent-ink:#492C95; --parent-soft:#EDE7FB;
-  --reset:#1AA39B;  --reset-ink:#0A5F5A;  --reset-soft:#E0F4F2;
-
-  /* currency */
-  --gold:#F3B100;
-  --gold-ink:#9A6E00;
+  /* quest + system colors : main / deep(text) / soft(tint) */
+  --body:#3DA35D;   --body-deep:#1F6B3A;   --body-soft:#E8F4EC;
+  --brain:#2D7DD2;  --brain-deep:#19568F;  --brain-soft:#E6F0FA;
+  --helper:#E0962A; --helper-deep:#8F5C10; --helper-soft:#FBEFD8;
+  --sister:#E25C9A; --sister-deep:#A52C68; --sister-soft:#FCE7F1;
+  --shop:#F2664A;   --shop-deep:#AE3A22;   --shop-soft:#FDE6DF;
+  --flow:#1FA39C;   --flow-deep:#0C6A65;   --flow-soft:#E0F3F1;
+  --parent:#7C5CD0; --parent-deep:#492C95; --parent-soft:#ECE6FB;
+  --gold:#F2B100;   --gold-deep:#9F6E00;   --gold-soft:#FBEEC6;
   --star:#FFC83D;
 
-  /* shape */
-  --r-sm:14px; --r:24px; --r-lg:34px; --r-xl:44px;
-  --shadow-card:0 10px 26px rgba(59,42,57,.10);
-  --shadow-soft:0 6px 16px rgba(59,42,57,.08);
+  --r:20px; --r-sm:13px; --r-lg:28px;
+  --shadow:0 8px 22px rgba(56,42,55,.10);
+  --shadow-sm:0 4px 12px rgba(56,42,55,.07);
 
-  --font:'Fredoka', ui-rounded, "Segoe UI", system-ui, sans-serif;
-  --arcade:'Press Start 2P', monospace;
+  --display:'Baloo 2', ui-rounded, system-ui, sans-serif;
+  --body-font:'Nunito', system-ui, sans-serif;
 
-  /* physical page */
-  --pad:0.62in;
+  --pad:0.7in;
 }
 
 *{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; }
 body{
-  font-family:var(--font);
+  font-family:var(--body-font);
   color:var(--ink);
-  background:#E7D4DE;          /* desk colour behind the sheets (screen only) */
+  background:#E4D8C8;
   -webkit-font-smoothing:antialiased;
-  -webkit-print-color-adjust:exact;
-  print-color-adjust:exact;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
 }
 
-/* ============================ PAGES ============================ */
-.book{
-  display:flex; flex-direction:column; align-items:center;
-  gap:26px; padding:34px 18px 60px;
-}
+/* ---- subject-color binding ---- */
+.q-body{--c:var(--body);--c-deep:var(--body-deep);--c-soft:var(--body-soft);}
+.q-brain{--c:var(--brain);--c-deep:var(--brain-deep);--c-soft:var(--brain-soft);}
+.q-helper{--c:var(--helper);--c-deep:var(--helper-deep);--c-soft:var(--helper-soft);}
+.q-sister{--c:var(--sister);--c-deep:var(--sister-deep);--c-soft:var(--sister-soft);}
+.q-shop{--c:var(--shop);--c-deep:var(--shop-deep);--c-soft:var(--shop-soft);}
+.q-flow{--c:var(--flow);--c-deep:var(--flow-deep);--c-soft:var(--flow-soft);}
+.q-parent{--c:var(--parent);--c-deep:var(--parent-deep);--c-soft:var(--parent-soft);}
+.q-gold{--c:var(--gold);--c-deep:var(--gold-deep);--c-soft:var(--gold-soft);}
+
+/* ============================ PAGE PLATE ============================ */
+.book{ display:flex; flex-direction:column; align-items:center; gap:26px; padding:32px 16px 60px; }
 .sheet{
-  width:8.5in; height:11in;
+  width:8.5in; height:11in; position:relative; overflow:hidden;
   background:var(--paper);
-  position:relative; overflow:hidden;
-  box-shadow:0 14px 40px rgba(59,42,57,.22);
-  border-radius:4px;
   padding:var(--pad);
   display:flex; flex-direction:column;
+  box-shadow:0 12px 36px rgba(56,42,55,.20);
+  --c:var(--ink); --c-deep:var(--ink); --c-soft:var(--paper-2);
 }
-.sheet__bleed{ /* full-bleed coloured background helper */
-  position:absolute; inset:0; z-index:0;
+.sheet::before{ /* keyline plate frame + faint cut guide */
+  content:""; position:absolute; inset:.36in;
+  border:1.5px solid var(--edge); border-radius:16px; pointer-events:none; z-index:0;
 }
 .sheet > *{ position:relative; z-index:1; }
 
@@ -75,208 +77,120 @@ body{
   @page{ size:letter portrait; margin:0; }
   body{ background:#fff; }
   .book{ gap:0; padding:0; }
-  .sheet{
-    box-shadow:none; border-radius:0;
-    break-after:page; page-break-after:always;
-    width:8.5in; height:11in;
-  }
+  .sheet{ box-shadow:none; break-after:page; page-break-after:always; }
   .sheet:last-child{ break-after:auto; page-break-after:auto; }
   .screen-only{ display:none !important; }
 }
-.screen-only{
-  color:#7a5d6c; font-size:13px; letter-spacing:.02em;
-}
 
 /* ============================ ICONS ============================ */
-.i{ width:1em; height:1em; display:inline-block; vertical-align:-0.14em; fill:currentColor; }
+.i{ width:1em; height:1em; display:inline-block; vertical-align:-0.135em; fill:currentColor; }
 .icon-sprite{ position:absolute; width:0; height:0; overflow:hidden; }
 
-/* ============================ TYPE ============================ */
-.kicker{
-  font-family:var(--arcade); font-size:9px; letter-spacing:.12em;
-  text-transform:uppercase; color:var(--ink-soft);
+/* ============================ PLATE TAB (role) ============================ */
+.tab{
+  position:absolute; top:.18in; right:.5in; z-index:4;
+  font-family:var(--display); font-weight:700; font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; color:#fff; padding:.46em 1em .4em;
+  border-radius:0 0 10px 10px; box-shadow:0 3px 8px rgba(56,42,55,.18);
 }
-.h-page{ font-weight:700; font-size:40px; line-height:1.04; letter-spacing:-.015em; margin:0; text-wrap:balance; }
-.h-sub{ font-weight:500; font-size:19px; color:var(--ink-soft); margin:6px 0 0; }
-.h-card{ font-weight:700; font-size:24px; line-height:1.08; margin:0; }
+.tab--wall{background:var(--flow-deep);}
+.tab--kid{background:var(--sister);}
+.tab--parent{background:var(--parent-deep);}
+.tab--handoff{background:var(--gold-deep);}
+.tab--mystery{background:var(--shop);}
 
-.title-pop{ /* game-title style outline pop */
-  text-shadow:0 3px 0 rgba(59,42,57,.10);
+/* ============================ PAGE HEADER ============================ */
+.phead{ display:flex; align-items:flex-start; gap:.26in; padding-bottom:.15in; border-bottom:2.5px solid var(--c); margin-bottom:.2in; }
+.phead__badge{ flex:none; }
+.phead__txt{ min-width:0; flex:1; }
+.eyebrow{ font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--c-deep); }
+.ptitle{ font-family:var(--display); font-weight:800; font-size:42px; line-height:.98; letter-spacing:-.01em; margin:.04in 0 0; color:var(--ink); }
+.psub{ font-size:16.5px; color:var(--ink-soft); margin:.06in 0 0; font-weight:600; }
+
+/* ============================ BADGE (icon disc) ============================ */
+.badge{ display:inline-flex; align-items:center; justify-content:center; border-radius:50%; background:var(--c); color:#fff; flex:none; box-shadow:inset 0 -3px 0 rgba(0,0,0,.10); }
+.badge--xl{ width:1.15in; height:1.15in; } .badge--xl .i{ font-size:.62in; }
+.badge--lg{ width:.92in; height:.92in; } .badge--lg .i{ font-size:.5in; }
+.badge--md{ width:.66in; height:.66in; } .badge--md .i{ font-size:.36in; }
+.badge--sm{ width:.5in; height:.5in; } .badge--sm .i{ font-size:.28in; }
+.badge--soft{ background:var(--c-soft); color:var(--c); box-shadow:none; }
+.badge--ring{ border-radius:22px; }
+
+/* ============================ STICKER RING ============================ */
+.sticker{
+  position:relative; width:.62in; height:.62in; border-radius:50%;
+  border:2.5px dashed var(--c); background:var(--panel);
+  display:flex; align-items:center; justify-content:center; flex:none;
 }
+.sticker .i{ font-size:.3in; color:var(--c); opacity:.22; }
+.sticker--gold{ --c:var(--gold); border-style:solid; box-shadow:0 0 0 3px var(--gold-soft); }
 
-/* ============================ QUEST TAG / CHIP ============================ */
-.qtag{
+/* ============================ DRY-ERASE FIELDS ============================ */
+.write{ background:var(--panel); border:2px dashed var(--ink-faint); border-radius:12px; }
+.writeline{ border:none; border-bottom:2.5px dashed var(--ink-faint); height:0; }
+.dry{
   display:inline-flex; align-items:center; gap:.5em;
-  font-weight:600; font-size:16px; line-height:1;
-  padding:.5em .8em; border-radius:999px;
-  background:var(--c-soft); color:var(--c-ink);
+  font-size:12.5px; font-weight:700; color:var(--flow-deep);
+  background:var(--flow-soft); border-radius:999px; padding:.32em .8em;
 }
-.qtag .i{ font-size:1.25em; color:var(--c); }
-.qtag--solid{ background:var(--c); color:#fff; }
-.qtag--solid .i{ color:#fff; }
+.dry .i{ font-size:1.25em; }
 
-/* colour binding utility */
-.c-brain{ --c:var(--brain); --c-ink:var(--brain-ink); --c-soft:var(--brain-soft); }
-.c-body{ --c:var(--body); --c-ink:var(--body-ink); --c-soft:var(--body-soft); }
-.c-helper{ --c:var(--helper); --c-ink:var(--helper-ink); --c-soft:var(--helper-soft); }
-.c-sister{ --c:var(--sister); --c-ink:var(--sister-ink); --c-soft:var(--sister-soft); }
-.c-shop{ --c:var(--shop); --c-ink:var(--shop-ink); --c-soft:var(--shop-soft); }
-.c-parent{ --c:var(--parent); --c-ink:var(--parent-ink); --c-soft:var(--parent-soft); }
-.c-reset{ --c:var(--reset); --c-ink:var(--reset-ink); --c-soft:var(--reset-soft); }
-.c-gold{ --c:var(--gold); --c-ink:var(--gold-ink); --c-soft:#FCEFC6; }
-
-/* ============================ COIN / POINTS ============================ */
+/* ============================ COIN / COST ============================ */
 .coin{
   display:inline-flex; align-items:center; justify-content:center;
-  width:1.5em; height:1.5em; border-radius:50%;
-  background:radial-gradient(circle at 38% 32%, #FFE08A, var(--gold) 70%);
-  box-shadow:inset 0 0 0 .14em #fff3, 0 .12em 0 var(--gold-ink);
-  color:#fff; flex:none;
+  width:1em; height:1em; border-radius:50%;
+  background:radial-gradient(circle at 38% 30%, #FFE48C, var(--gold) 72%);
+  box-shadow:inset 0 0 0 .12em rgba(255,255,255,.45), 0 .1em 0 var(--gold-deep);
+  color:#fff;
 }
-.coin .i{ font-size:.9em; }
-.coin-cost{
-  display:inline-flex; align-items:center; gap:.34em;
-  font-weight:700; color:var(--gold-ink);
-}
-.coin-cost .num{ font-family:var(--arcade); font-size:.78em; }
+.coin .i{ font-size:.62em; }
+.cost{ display:inline-flex; align-items:center; gap:.16in; }
+.cost .coin{ font-size:.6in; }
+.cost__n{ font-family:var(--display); font-weight:800; font-size:34px; line-height:1; color:var(--gold-deep); }
+.cost__u{ font-family:var(--display); font-weight:700; font-size:11px; letter-spacing:.12em; color:var(--ink-faint); text-transform:uppercase; }
 
-/* big point readout (arcade) */
-.points-readout{
-  font-family:var(--arcade); color:var(--gold-ink);
-  letter-spacing:.02em;
-}
+/* ============================ LEVEL CHIP ============================ */
+.lv{ display:inline-flex; align-items:center; gap:.3em; font-family:var(--display); font-weight:800; font-size:13px; color:#fff; background:var(--c); padding:.3em .7em; border-radius:8px; }
 
-/* ============================ CARDS ============================ */
-.card{
-  background:var(--card); border-radius:var(--r);
-  box-shadow:var(--shadow-card);
-  position:relative; overflow:hidden;
-  display:flex; flex-direction:column;
-}
-.card__bar{ height:.42in; background:var(--c); flex:none; }
-.card__body{ padding:.3in .32in .34in; display:flex; flex-direction:column; gap:.16in; flex:1; }
+/* ============================ STEPS ============================ */
+.steps{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.08in; }
+.steps li{ display:flex; gap:.14in; align-items:flex-start; font-size:14px; line-height:1.22; font-weight:600; }
+.steps li > span:last-child{ flex:1 1 auto; min-width:0; padding-top:.02in; }
+.steps .num{ flex:none; width:1.5em; height:1.5em; border-radius:50%; background:var(--c-soft); color:var(--c-deep); font-family:var(--display); font-weight:700; display:flex; align-items:center; justify-content:center; font-size:13px; }
 
-/* HUD panel — rounded with corner notches */
-.panel{
-  background:var(--card); border-radius:var(--r);
-  box-shadow:var(--shadow-soft);
-  border:3px solid var(--c, var(--line));
-  position:relative;
-}
+/* ============================ DRY-ERASE CHECKS ============================ */
+.checks{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.12in; }
+.checks li{ display:flex; gap:.14in; align-items:center; font-size:16px; font-weight:700; }
+.tick{ flex:none; width:1.4em; height:1.4em; border-radius:50%; border:2.5px dashed var(--c); background:var(--panel); }
 
-/* ============================ STICKER SLOT & FILL LINE ============================ */
-.slot{
-  width:.62in; height:.62in; border-radius:50%;
-  border:2.5px dashed var(--c, var(--ink-faint));
-  background:#fff;
-  display:flex; align-items:center; justify-content:center;
-  color:var(--c, var(--ink-faint)); opacity:.85;
-}
-.slot .i{ font-size:.3in; opacity:.45; }
-.slot--sq{ border-radius:12px; }
-
-.fillline{
-  border:none; border-bottom:2.5px dashed var(--ink-faint);
-  height:0; flex:1; align-self:flex-end;
-}
-.write-box{
-  border:2.5px dashed var(--c, var(--ink-faint));
-  border-radius:14px; background:#fff;
-}
-
-/* ============================ RIBBON / RANK ============================ */
-.ribbon{
-  display:inline-flex; align-items:center; gap:.4em;
-  font-family:var(--arcade); font-size:10px; letter-spacing:.06em;
-  color:#fff; background:var(--c); padding:.7em .8em;
-  border-radius:8px; box-shadow:0 .18em 0 var(--c-ink);
-}
-
-/* ============================ STEPS / CHECKLIST ============================ */
-.steps{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.13in; }
-.steps li{ display:flex; gap:.14in; align-items:flex-start; font-size:17px; line-height:1.3; font-weight:500; }
-.steps li > span:not(.num){ flex:1 1 auto; min-width:0; }
-.steps .num{
-  flex:none; width:1.5em; height:1.5em; border-radius:50%;
-  background:var(--c-soft); color:var(--c-ink); font-weight:700;
-  display:flex; align-items:center; justify-content:center; font-size:14px;
-}
-.checks{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.14in; }
-.checks li{ display:flex; gap:.16in; align-items:center; font-size:18.5px; font-weight:600; }
-.checkbox{
-  flex:none; width:1.45em; height:1.45em; border-radius:8px;
-  border:2.5px solid var(--c, var(--ink-faint)); background:#fff;
-}
-
-/* ============================ SCRIPT / QUOTE ============================ */
-.script{
-  background:var(--c-soft); border-radius:16px;
-  padding:.18in .22in; font-weight:500; font-size:16px; color:var(--c-ink);
-  line-height:1.3; position:relative;
-}
-.script .lbl{
-  font-family:var(--arcade); font-size:8px; letter-spacing:.1em;
-  text-transform:uppercase; opacity:.7; display:block; margin-bottom:.08in;
-}
-
-/* ============================ NOTE / EARN PILL ============================ */
-.earn{
-  margin-top:auto; display:inline-flex; align-items:center; gap:.45em;
-  align-self:flex-start;
-  background:var(--c); color:#fff; font-weight:600; font-size:14.5px;
-  padding:.5em .8em; border-radius:999px; box-shadow:0 .16em 0 var(--c-ink);
-}
-.earn .i{ font-size:1.15em; }
-
-/* ============================ CUT GUIDES ============================ */
-.cutgrid{ display:grid; gap:.34in; flex:1; align-content:start; }
-.cutgrid--2{ grid-template-columns:1fr; }              /* two 4x6 stacked */
-.cutgrid--4{ grid-template-columns:1fr 1fr; }          /* 2x2 deck cards */
-.cutgrid--9{ grid-template-columns:1fr 1fr 1fr; }      /* mystery */
-.cut{ position:relative; }
-.cut::before{
-  content:""; position:absolute; inset:-.16in;
-  border:1.5px dashed rgba(120,90,108,.32); border-radius:8px;
-  pointer-events:none;
-}
-
-/* ============================ LEGEND ============================ */
-.legend{ display:grid; grid-template-columns:1fr 1fr; gap:.2in .28in; }
-.legend-row{ display:flex; align-items:center; gap:.18in; }
-.legend-chip{
-  width:.5in; height:.5in; border-radius:14px; flex:none;
-  display:flex; align-items:center; justify-content:center;
-  background:var(--c-soft); color:var(--c);
-}
-.legend-chip .i{ font-size:.3in; }
-.legend-row b{ font-weight:600; font-size:18px; }
-.legend-row span{ font-size:14.5px; color:var(--ink-soft); display:block; }
-
-/* ============================ MENU ROW (shop) ============================ */
-.tier{
-  display:grid; grid-template-columns:auto 1fr auto; gap:.26in; align-items:center;
-  background:#fff; border-radius:var(--r); padding:.24in .3in;
-  box-shadow:var(--shadow-soft); border-left:.16in solid var(--c);
-}
-
-/* ============================ MISC ============================ */
+/* ============================ GENERIC HELPERS ============================ */
 .row{ display:flex; align-items:center; gap:.16in; }
 .between{ display:flex; align-items:center; justify-content:space-between; gap:.16in; }
-.wrap{ flex-wrap:wrap; }
-.muted{ color:var(--ink-soft); }
-.center{ text-align:center; }
-.grow{ flex:1; }
-.divider{ height:2px; background:var(--line); border-radius:2px; border:none; margin:.06in 0; }
+.grow{ flex:1; } .muted{ color:var(--ink-soft); } .center{ text-align:center; }
+.spacer{ flex:1; }
 
-.pageno{
-  position:absolute; bottom:.26in; right:.4in; z-index:2;
-  font-family:var(--arcade); font-size:8px; color:var(--ink-faint);
-  letter-spacing:.08em;
-}
-.deck-foot{
-  font-family:var(--arcade); font-size:9px; color:var(--ink-faint);
-  letter-spacing:.06em; text-align:center; margin-top:.1in;
-}
+/* ============================ CUT GRID (cards) ============================ */
+.cutgrid{ display:grid; gap:.3in; flex:1; align-content:start; }
+.cutgrid--2{ grid-template-columns:1fr; }
+.cutgrid--6{ grid-template-columns:1fr 1fr; grid-auto-rows:2.7in; }
+.cutgrid--9{ grid-template-columns:repeat(3,1fr); grid-auto-rows:1fr; }
+.cutgrid--myst{ grid-template-columns:repeat(3,1fr); grid-auto-rows:1fr; gap:.16in; }
+.cutgrid--myst2{ grid-template-columns:1fr 1fr; grid-auto-rows:1fr; gap:.24in; }
+.mcard--big{ gap:.16in; }
+.mcard--big .badge{ width:1.15in; height:1.15in; }
+.mcard--big .badge .i{ font-size:.66in; }
+.mcard--big b{ font-size:23px; }
+.mcard--big .mcard__eyebrow{ font-size:10px; letter-spacing:.16em; }
+.mback--big .badge{ width:1.15in; height:1.15in; }
+.mback--big .badge .i{ font-size:.66in; }
+.mback--big h4{ font-size:26px; }
+.mback--big span{ font-size:13px; }
+.cut{ position:relative; }
+.cut::before{ content:""; position:absolute; inset:-.13in; border:1.4px dashed var(--ink-faint); border-radius:10px; opacity:.5; pointer-events:none; }
 
-/* sparkle decoration */
-.spk{ color:var(--star); }
+.deckhead{ display:flex; align-items:center; gap:.16in; margin-bottom:.11in; }
+.deckhead__txt h2{ font-family:var(--display); font-weight:800; font-size:24px; margin:0; line-height:1; }
+.deckhead__txt p{ margin:.04in 0 0; font-size:13.5px; color:var(--ink-soft); font-weight:600; }
+.deckfoot{ display:flex; align-items:center; justify-content:center; gap:.5em; margin-top:.14in; font-size:12px; font-weight:700; color:var(--ink-faint); }
+
+.pageno{ position:absolute; bottom:.2in; right:.5in; z-index:2; font-family:var(--display); font-weight:700; font-size:10px; letter-spacing:.1em; color:var(--ink-faint); }
